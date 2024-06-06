@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id', 10); //UNSIGNED BIGINT
+            $table->bigIncrements('id'); //UNSIGNED BIGINT
             $table->string('name', 255);
             $table->string('name_kana', 255);
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->string('profile_image', 255)->nullable();
-            $table->foreignId('grade_id', 10)->constrained();  // クラスID
+            $table->foreignId('grade_id')->constrained();  // クラスID
             $table->timestamps();
             // $table->rememberToken();
         });
