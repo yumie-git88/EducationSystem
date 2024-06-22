@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('classes_clear_checks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
-            $table->foreignId('grade_id')->constrained();
+            $table->foreignId('users_id')->constrained('users');
+            $table->foreignId('grade_id')->constrained('grades');
             $table->boolean('clear_flg');
             $table->timestamps();
         });
