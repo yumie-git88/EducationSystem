@@ -12,15 +12,16 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 255); // タイトル
-            $table->dateTime('posted_date'); // 投稿日時
-            $table->longText('article_contents'); // 記事内容
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('admins', function (Blueprint $table) {
+        $table->id();
+        $table->string('name',255); // ユーザー名
+        $table->string('email',255); // アドレス
+        $table->string('password',255); // パスワード
+        $table->timestamps(); 
+    });
+}
+
     /**
      * Reverse the migrations.
      *
@@ -28,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('admins');
     }
 };
-
