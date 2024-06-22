@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('curricurum_progress', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('curriculumus_id')->constrained();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignId('curriculumus_id')->constrained('curriculums');
+            $table->foreignId('users_id')->constrained('users');
             $table->boolean('clear_flg'); // クリアフラグ(クリア：1,未クリア:0)
             $table->timestamps();
         });
