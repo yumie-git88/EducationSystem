@@ -24,7 +24,7 @@
                 <div class="flex space-x-4">
                         <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/top') }}">時間割</a>
                         <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/top') }}">授業進捗</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/top') }}">プロフィール設定</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/profile_edit') }}">プロフィール設定</a>
                     </div>
                     <div class="block lg:hidden">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-700" onclick="document.getElementById('navbarSupportedContent').classList.toggle('hidden')">
@@ -37,7 +37,7 @@
                     <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="navbarSupportedContent">
                         <ul class="lg:flex lg:space-x-4">
                             <!-- Authentication Links -->
-                            @guest
+                            @guest('user')
                                 <li class="nav-item">
                                     <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.auth.login') }}">{{ __('ログイン') }}</a>
                                 </li>

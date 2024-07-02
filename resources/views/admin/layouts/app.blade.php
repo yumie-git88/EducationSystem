@@ -37,7 +37,7 @@
                     <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="navbarSupportedContent">
                         <ul class="lg:flex lg:space-x-4">
                             <!-- Authentication Links -->
-                            @guest
+                            @guest('admin')
                                 <li class="nav-item">
                                     <a class="text-gray-700 hover:text-gray-900" href="{{ route('admin.auth.login') }}">{{ __('ログイン') }}</a>
                                 </li>
