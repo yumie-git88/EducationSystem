@@ -36,6 +36,8 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::view('/top', 'user.top')->middleware('auth:user')->name('top');
     // プロフィール設定ページ
     Route::view('/profile_edit', 'user.profile_edit')->name('profile_edit');
+    // 授業進捗ページ
+    Route::view('/curriculum_progress', 'user.curriculum_progress')->name('curriculum_progress');
 });
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
