@@ -17,25 +17,6 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    // public function handle(Request $request, Closure $next, ...$guards)
-    // {
-    //     $guards = empty($guards) ? [null] : $guards;
-
-    //     foreach ($guards as $guard) {
-    //         if($guard == "admin" && Auth::guard($guard)->check()) {   
-    //             return redirect('admin/top');                        
-    //         }
-    //         if($guard == "user" && Auth::guard($guard)->check()) {   
-    //             return redirect('user/top');              
-    //         } 
-    //         if (Auth::guard($guard)->check()) {
-    //             return redirect(RouteServiceProvider::HOME);
-    //         }
-    //     }
-
-    //     return $next($request);
-    // }
-
     public function handle($request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
@@ -46,9 +27,6 @@ class RedirectIfAuthenticated
             }
             if($guard == "admin" && Auth::guard($guard)->check()) {   
                 return redirect('admin/top');                        
-            }
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
             }
         }
 

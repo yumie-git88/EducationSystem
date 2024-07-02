@@ -30,10 +30,12 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     // ログイン
     Route::view('/login', 'user.auth.login')->name('auth.login');
     Route::post('/login', [App\Http\Controllers\User\Auth\LoginController::class, 'login']);
-    // ログアウト
-    Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('logout');
-    // トップページ
-    Route::view('/top', 'user.top')->middleware('auth:user')->name('top');
+    Route::middleware('auth:user')->group(function () {
+        // トップページ
+        Route::view('/top', 'user.top')->name('top');
+        // ログアウト
+        Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('logout');
+    });
     // プロフィール設定ページ
     Route::view('/profile_edit', 'user.profile_edit')->name('profile_edit');
     // 授業進捗ページ
@@ -50,8 +52,10 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     // ログイン
     Route::view('/login', 'admin.auth.login')->name('auth.login');
     Route::post('/login', [App\Http\Controllers\Admin\Auth\LoginController::class, 'login']);
-    // ログアウト
-    Route::post('/logout', [App\Http\Controllers\Admin\Auth\LoginController::class,'logout'])->name('logout');
-    // トップページ
-    Route::view('/top', 'admin.top')->middleware('auth:admin')->name('top');
+    Route::middleware('auth:admin')->group(function () {
+        // トップページ
+        Route::view('/top', 'admin.top')->name('top');
+        // ログアウト
+        Route::post('/logout', [App\Http\Controllers\Admin\Auth\LoginController::class,'logout'])->name('logout');
+    });
 });
