@@ -40,7 +40,7 @@
             @if (Route::has('admin.auth.login'))
                 <div class="hidden fixed top-10 right-0 px-6 py-4 sm:block">
                     @auth('admin')
-                        <a href="{{ url('/adimin/top') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー トップ</a>
+                        <a href="{{ url('/admin/top') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー トップ</a>
                     @else
                         <a href="{{ route('admin.auth.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー ログイン</a>
 

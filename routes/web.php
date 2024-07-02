@@ -30,7 +30,6 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('logout');
 });
 
-
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::view('/register', 'admin.auth.register')->name('auth.register');
     Route::post('/register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'register']);

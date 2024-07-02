@@ -11,7 +11,7 @@
                 <div class="flex justify-center text-4xl mb-3">ログイン</div>
  
                 <div class="card-body">
-                    <form method="POST" action="{{ url('user/auth/login') }}">
+                    <form method="POST" action="{{ url('user/login') }}">
                         @csrf
 
                         <div class="row mb-3">
