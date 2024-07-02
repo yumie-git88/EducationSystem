@@ -43,10 +43,12 @@ return [
         'user' => [
             'driver' => 'session',
             'provider' => 'users',
+            'table' => 'user_sessions', // ユーザーのセッション用テーブル
         ],
         'admin' => [                
             'driver' => 'session',  
             'provider' => 'admins',
+            'table' => 'admin_sessions', // 管理者のセッション用テーブル
         ],
     ],
 
@@ -75,11 +77,7 @@ return [
         'admins' => [                            
             'driver' => 'eloquent',              
             'model' => App\Models\Admin::class,
-        ], 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        ],
     ],
 
     /*

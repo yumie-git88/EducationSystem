@@ -44,10 +44,10 @@
                             @else
                                 <li class="nav-item">
                                     <a class="text-gray-700 hover:text-gray-900" href="{{ route('admin.logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                       onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();">
                                         {{ __('ログアウト') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="hidden">
+                                    <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" class="hidden">
                                         @csrf
                                     </form>
                                 </li>
