@@ -38,6 +38,8 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::view('/profile_edit', 'user.profile_edit')->name('profile_edit');
     // 授業進捗ページ
     Route::view('/curriculum_progress', 'user.curriculum_progress')->name('curriculum_progress');
+    // 授業一覧ページ
+    Route::view('/curriculum_list', 'user.curriculum_list')->name('curriculum_list');
 });
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
