@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    protected $redirectTo = '/user/top';
+    protected $redirectTo = '/user/top'; 
 
-    public function edit($id = null)
+    public function showProfileForm($id = null)
     {
         $id = Auth::id(); // ログインユーザーのIDを取得
         $user = User::find($id);
@@ -27,7 +27,12 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(StoreUserProfileRequest $request, $id = null)
+    public function showPasswordFrom()
+    {
+        return view('user.password_edit');
+    }
+
+    public function updateProfile(StoreUserProfileRequest $request, $id = null)
     {
         try {
             $id = Auth::id(); // ログインユーザーのIDを取得

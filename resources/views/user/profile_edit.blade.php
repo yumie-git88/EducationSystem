@@ -13,7 +13,7 @@
                     @endif
                     <a class="text-2xl" href="{{ route('user.show.top') }}">{{ __('←戻る') }}</a>
                     <div class="text-4xl font-semibold mt-2 mb-4">プロフィール変更</div>
-                    <form id="form-area" class="" method="post" action="{{ route('user.show.update') }}" enctype="multipart/form-data">
+                    <form id="form-area" class="" method="post" action="{{ route('user.update.profile') }}" enctype="multipart/form-data">
                         @csrf
                         <div>
                             @foreach($errors->all() as $message)

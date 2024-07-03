@@ -46,6 +46,11 @@ class RegisterController extends Controller
         return Auth::guard('user');           
     }
 
+    public function showRegisterForm()
+    {
+        return view('user.auth.register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *

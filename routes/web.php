@@ -24,26 +24,32 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::redirect('/', '/user/top');
+
     // ユーザー新規登録
-    Route::view('/register', 'user.auth.register')->name('show.register');
+    Route::get('/register', [App\Http\Controllers\User\Auth\RegisterController::class, 'showRegisterForm'])->name('show.register');
     Route::post('/register', [App\Http\Controllers\User\Auth\RegisterController::class, 'register']);
     // ログイン画面
-    Route::view('/login', 'user.auth.login')->name('show.login');
+    Route::get('/login', [App\Http\Controllers\User\Auth\LoginController::class, 'showLoginForm'])->name('show.login');
     Route::post('/login', [App\Http\Controllers\User\Auth\LoginController::class, 'login']);
+
     Route::middleware('auth:user')->group(function () {
         // トップページ
-        Route::view('/top', 'user.top')->name('show.top');
+        Route::get('/top', [App\Http\Controllers\User\TopController::class, 'showTop'])->name('show.top');
+
         // ログアウト
         Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('show.logout');
+
         // プロフィール設定画面
-        Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'edit'])->name('show.profile');
-        Route::post('/profile', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('show.update');
+        Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'showProfileForm'])->name('show.profile');
+        Route::post('/profile', [App\Http\Controllers\User\ProfileController::class, 'updateProfile'])->name('update.profile');
+
+        // パスワード設定画面
+        Route::get('/password', [App\Http\Controllers\User\ProfileController::class, 'showPasswordFrom'])->name('show.password.edit');
+
         // 授業進捗画面
         Route::view('/progress', 'user.curriculum_progress')->name('show.progress');
         // 授業一覧画面
         Route::view('/curriculum_list', 'user.curriculum_list')->name('show.curriculum');
-        // パスワード設定画面
-        Route::view('/password', 'user.password_edit')->name('show.password.edit');
     });
 });
 

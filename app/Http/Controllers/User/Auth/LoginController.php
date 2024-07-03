@@ -42,7 +42,12 @@ class LoginController extends Controller
     protected function guard()                              
     {                                                      
         return Auth::guard('user');                       
-    }                                                       
+    }
+    
+    public function showLoginForm()
+    {
+        return view('user.auth.login');
+    }
 
     public function logout(Request $request)               
     {                                                       
