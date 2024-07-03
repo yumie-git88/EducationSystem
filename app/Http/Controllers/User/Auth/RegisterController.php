@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'name_kana' => $data['name_kana'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'grade_id' => 1, // デフォルト値を設定
         ]);
     }
 }

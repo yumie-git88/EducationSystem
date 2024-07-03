@@ -21,10 +21,10 @@
         <nav class="bg-white shadow-sm">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center py-4">
-                <div class="flex space-x-4">
+                    <div class="flex space-x-4">
                         <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/curriculum_list') }}">時間割</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/curriculum_progress') }}">授業進捗</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/profile_edit') }}">プロフィール設定</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/progress') }}">授業進捗</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ route('user.show.profile') }}">プロフィール設定</a>
                     </div>
                     <div class="block lg:hidden">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-700" onclick="document.getElementById('navbarSupportedContent').classList.toggle('hidden')">
@@ -39,15 +39,15 @@
                             <!-- Authentication Links -->
                             @guest('user')
                                 <li class="nav-item">
-                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.auth.login') }}">{{ __('ログイン') }}</a>
+                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.show.login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.logout') }}"
+                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.show.logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('ログアウト') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="hidden">
+                                    <form id="logout-form" action="{{ route('user.show.logout') }}" method="POST" class="hidden">
                                         @csrf
                                     </form>
                                 </li>

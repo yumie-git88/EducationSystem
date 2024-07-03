@@ -25,23 +25,26 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::redirect('/', '/user/top');
     // ユーザー新規登録
-    Route::view('/register', 'user.auth.register')->name('auth.register');
+    Route::view('/register', 'user.auth.register')->name('show.register');
     Route::post('/register', [App\Http\Controllers\User\Auth\RegisterController::class, 'register']);
-    // ログイン
-    Route::view('/login', 'user.auth.login')->name('auth.login');
+    // ログイン画面
+    Route::view('/login', 'user.auth.login')->name('show.login');
     Route::post('/login', [App\Http\Controllers\User\Auth\LoginController::class, 'login']);
     Route::middleware('auth:user')->group(function () {
         // トップページ
-        Route::view('/top', 'user.top')->name('top');
+        Route::view('/top', 'user.top')->name('show.top');
         // ログアウト
-        Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('logout');
+        Route::post('/logout', [App\Http\Controllers\User\Auth\LoginController::class,'logout'])->name('show.logout');
+        // プロフィール設定画面
+        Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'edit'])->name('show.profile');
+        Route::post('/profile', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('show.update');
+        // 授業進捗画面
+        Route::view('/progress', 'user.curriculum_progress')->name('show.progress');
+        // 授業一覧画面
+        Route::view('/curriculum_list', 'user.curriculum_list')->name('show.curriculum');
+        // パスワード設定画面
+        Route::view('/password', 'user.password_edit')->name('show.password.edit');
     });
-    // プロフィール設定ページ
-    Route::view('/profile_edit', 'user.profile_edit')->name('profile_edit');
-    // 授業進捗ページ
-    Route::view('/curriculum_progress', 'user.curriculum_progress')->name('curriculum_progress');
-    // 授業一覧ページ
-    Route::view('/curriculum_list', 'user.curriculum_list')->name('curriculum_list');
 });
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {

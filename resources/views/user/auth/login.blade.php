@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="flex justify-end">
-                    <a class="nav-link mt-3 mb-3 mr-5" href="{{ route('user.auth.register') }}">{{ __('新規会員登録はこちら') }}</a> 
+                    <a class="nav-link mt-3 mb-3 mr-5" href="{{ route('user.show.register') }}">{{ __('新規会員登録はこちら') }}</a> 
                 </div>
                 <div class="flex justify-center text-4xl mb-3">ログイン</div>
  
