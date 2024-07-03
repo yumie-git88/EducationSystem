@@ -9,6 +9,8 @@ class DeliveryTime extends Model
 {
     use HasFactory;
 
+    protected $table = 'delivery_times';
+
     public function grade() {
         return $this->belongsTo(Grade::class);
     }

@@ -9,6 +9,8 @@ class CurricurumProgress extends Model
 {
     use HasFactory;
 
+    protected $table = 'curriculum_progress';
+
     public function user() {
         return $this->belongsTo(User::class);
     }

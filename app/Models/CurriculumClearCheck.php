@@ -9,6 +9,8 @@ class CurriculumClearCheck extends Model
 {
     use HasFactory;
 
+    protected $table = 'classes_clear_checks'; //スネークケースで命名されているため指定
+
     public function user() {
         return $this->belongsTo(User::class);
     }

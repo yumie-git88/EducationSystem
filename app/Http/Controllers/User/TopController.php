@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
+use App\Models\Banner; // モデルを現在のファイルで使用する宣言
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class TopController extends Controller
@@ -14,7 +16,11 @@ class TopController extends Controller
      */
     public function index()
     {
-        //
+        $banners = Banner::all();  // 全ての情報を取得
+        $articles = Article::all();  
+
+        return view('user.top', compact('banners', 'articles')); // userディレクトリのTOP画面に情報を渡す
+
     }
 
     /**
@@ -33,6 +39,7 @@ class TopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // 送られたデータをデータベースに保存するメソッド
     public function store(Request $request)
     {
         //
@@ -44,9 +51,9 @@ class TopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Banner $banner)
     {
-        //
+        return view('user.top', compact('banners', 'articles')); // userディレクトリのTOP画面に情報を渡す
     }
 
     /**
@@ -55,7 +62,7 @@ class TopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Banner $banner)
     {
         //
     }
@@ -67,7 +74,7 @@ class TopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Banner $banner)
     {
         //
     }
@@ -78,7 +85,7 @@ class TopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Banner $banner)
     {
         //
     }
