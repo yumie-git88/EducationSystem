@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [ //データベースに追加や更新を許可
         'name',
+        'name_kana',
         'email',
         'password',
+        'profile_image',
+        'grade_id',
     ];
 
     /**
@@ -41,4 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function checks() {
+        return $this->hasMany(CurriculumClearCheck::class);
+    }
+
+    public function progress() {
+        return $this->hasMany(CurriculumProgress::class);
+    }
+
+    public function grade() {
+        return $this->belongsTo(Grade::class); //hasMany
+    }
 }
