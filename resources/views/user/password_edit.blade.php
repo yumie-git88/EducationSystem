@@ -11,53 +11,31 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a class="text-2xl" href="{{ route('user.show.profile') }}">{{ __('←戻る') }}</a>
-                    <div class="text-4xl font-semibold mt-2 mb-4">パスワード変更</div>
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <a class="text-2xl mt-4 ml-4" href="{{ route('user.show.profile') }}">{{ __('←戻る') }}</a>
+                    <div class="text-4xl font-semibold mt-2 mb-4 ml-4">パスワード変更</div>
+                    <form method="POST" action="{{ route('user.update.password') }}">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div>
+                            @foreach($errors->all() as $message)
+                                <p class="ml-4 mb-4 text-danger">{{$message}}</p>
+                            @endforeach
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('新パスワード') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div>
+                            <label for="password" class="mb-2 ml-4 w-1/6">旧パスワード</label>
+                            <input id="password" name="password" type="password" class="border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-3/5 p-2.5 mt-4 ml-4"/>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('新パスワード確認') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div>
+                            <label for="new_password" class="mb-2 ml-4 w-1/6">新パスワード</label>
+                            <input id="new_password" name="new_password" type="password" class="border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-3/5 p-2.5 mt-4 ml-4"/>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn bg-amber-500 hover:bg-amber-400 text-white px-3 ml-3.5 mr-4 mt-2 mb-3">
-                                    {{ __('登録') }}
-                                </button>
-                            </div>
+                        <div>
+                            <label for="new_password_confirmation" class="mb-2 ml-4 w-1/6">新パスワード確認</label>
+                            <input id="new_password_confirmation" name="new_password_confirmation" type="password" class="border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-3/5 p-2.5 mt-4 ml-4"/>
+                        </div>
+                        <div class="flex justify-center">
+                            <button type="submit" class="btn bg-amber-500 hover:bg-amber-400 text-white px-3 ml-3.5 mr-4 mt-10 mb-3">
+                                {{ __('登録') }}
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -6,33 +6,27 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     protected $redirectTo = '/user/top'; 
 
-    public function showProfileForm($id = null)
+    public function showProfileForm()
     {
         $id = Auth::id(); // ログインユーザーのIDを取得
         $user = User::find($id);
         $validation = new StoreUserProfileRequest();
-        
-        if (!$user) {
-            abort(404); // ユーザーが見つからない場合は404エラーを返す
-        }
 
         return view('user.profile_edit', compact('user'), [
             'rules' => $validation->rules()
         ]);
     }
 
-    public function showPasswordFrom()
-    {
-        return view('user.password_edit');
-    }
-
-    public function updateProfile(StoreUserProfileRequest $request, $id = null)
+    public function updateProfile(StoreUserProfileRequest $request)
     {
         try {
             $id = Auth::id(); // ログインユーザーのIDを取得
@@ -78,11 +72,37 @@ class ProfileController extends Controller
                 $user->save();
             }
             
-            return to_route('user.show.top');
+            return to_route('user.show.top')->with('status', 'プロフィールが変更されました');
 
         } catch (\Exception $e) {
             report($e);
             session()->flash('flash_message', '更新が失敗しました');
         }
     }
+
+    // public function showPasswordFrom()
+    // {
+    //     $validation = new StoreUserProfileRequest();
+
+    //     return view('user.password_edit', [
+    //         'rules' => $validation->rules()
+    //     ]);
+
+    //     return view('user.password_edit');
+    // }
+
+    // public function updatePassword(StoreUserProfileRequest $request)
+    // {
+    //     $id = Auth::id(); // ログインユーザーのIDを取得
+    //     $user = User::find($id);
+
+    //     if (!Hash::check($request->password, $user->password)) {
+    //         return back()->withErrors(['password' => '旧パスワードが正しくありません']);
+    //     }
+
+    //     $user->password = Hash::make($request->new_password);
+    //     $user->save();
+
+    //     return redirect()->route('user.show.top')->with('status', 'パスワードが変更されました');
+    // }
 }

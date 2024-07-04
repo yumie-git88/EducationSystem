@@ -44,7 +44,8 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
         Route::post('/profile', [App\Http\Controllers\User\ProfileController::class, 'updateProfile'])->name('update.profile');
 
         // パスワード設定画面
-        Route::get('/password', [App\Http\Controllers\User\ProfileController::class, 'showPasswordFrom'])->name('show.password.edit');
+        Route::get('/password', [App\Http\Controllers\User\PasswordController::class, 'showPasswordFrom'])->name('show.password.edit');
+        Route::post('/password', [App\Http\Controllers\User\PasswordController::class, 'updatePassword'])->name('update.password');
 
         // 授業進捗画面
         Route::view('/progress', 'user.curriculum_progress')->name('show.progress');
