@@ -79,30 +79,4 @@ class ProfileController extends Controller
             session()->flash('flash_message', '更新が失敗しました');
         }
     }
-
-    // public function showPasswordFrom()
-    // {
-    //     $validation = new StoreUserProfileRequest();
-
-    //     return view('user.password_edit', [
-    //         'rules' => $validation->rules()
-    //     ]);
-
-    //     return view('user.password_edit');
-    // }
-
-    // public function updatePassword(StoreUserProfileRequest $request)
-    // {
-    //     $id = Auth::id(); // ログインユーザーのIDを取得
-    //     $user = User::find($id);
-
-    //     if (!Hash::check($request->password, $user->password)) {
-    //         return back()->withErrors(['password' => '旧パスワードが正しくありません']);
-    //     }
-
-    //     $user->password = Hash::make($request->new_password);
-    //     $user->save();
-
-    //     return redirect()->route('user.show.top')->with('status', 'パスワードが変更されました');
-    // }
 }

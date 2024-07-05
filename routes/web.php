@@ -76,6 +76,15 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
 
         // お知らせ一覧画面
         Route::get('/article_list', [App\Http\Controllers\Admin\ArticleController::class, 'showArticleList'])->name('show.article.list');
+        Route::delete('/article_destroy/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'destroyArticle'])->name('article.destroy');
+
+        // お知らせ新規登録画面
+        Route::get('/article_create', [App\Http\Controllers\Admin\ArticleController::class, 'showArticleCreate'])->name('show.article.create');
+        Route::post('/article_create', [App\Http\Controllers\Admin\ArticleController::class, 'storeArticleCreate'])->name('store.article.create');
+
+        // お知らせ変更画面
+        Route::get('/article_edit/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'showArticleEdit'])->name('show.article.edit');
+        Route::post('/article_edit/{id}', [App\Http\Controllers\Admin\ArticleController::class, 'updateArticleEdit'])->name('update.article.edit');
 
         // 授業一覧画面
         Route::view('/curriculum_list', 'admin.curriculum_list')->name('show.curriculum.list');
