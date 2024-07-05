@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="flex justify-end">
-                    <a class="nav-link mt-3 mb-3 mr-5" href="{{ route('admin.auth.login') }}">{{ __('ログインはこちら') }}</a> 
+                    <a class="nav-link mt-3 mb-3 mr-5" href="{{ route('admin.show.login') }}">{{ __('ログインはこちら') }}</a> 
                 </div>
                 <div class="flex justify-center text-4xl mb-3">新規管理ユーザー登録</div>
 

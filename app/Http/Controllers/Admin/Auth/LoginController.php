@@ -45,7 +45,12 @@ class LoginController extends Controller
     protected function guard()                              
     {                                                      
         return Auth::guard('admin');                       
-    }                                                       
+    }
+    
+    public function showLoginForm()
+    {
+        return view('admin.auth.login');
+    }
 
     public function logout(Request $request)               
     {                                                       

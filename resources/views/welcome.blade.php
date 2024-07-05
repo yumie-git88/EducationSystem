@@ -37,15 +37,15 @@
                 </div>
             @endif
 
-            @if (Route::has('admin.auth.login'))
+            @if (Route::has('admin.show.login'))
                 <div class="hidden fixed top-10 right-0 px-6 py-4 sm:block">
                     @auth('admin')
                         <a href="{{ url('/admin/top') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー トップ</a>
                     @else
-                        <a href="{{ route('admin.auth.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー ログイン</a>
+                        <a href="{{ route('admin.show.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー ログイン</a>
 
-                        @if (Route::has('admin.auth.register'))
-                            <a href="{{ route('admin.auth.register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー 新規会員登録</a>
+                        @if (Route::has('admin.show.register'))
+                            <a href="{{ route('admin.show.register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">管理ユーザー 新規会員登録</a>
                         @endif
                     @endauth
                 </div>

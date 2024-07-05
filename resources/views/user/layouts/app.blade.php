@@ -43,11 +43,11 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.show.logout') }}"
+                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('user.logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('ログアウト') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('user.show.logout') }}" method="POST" class="hidden">
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="hidden">
                                         @csrf
                                     </form>
                                 </li>

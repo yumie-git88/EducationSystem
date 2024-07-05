@@ -22,9 +22,9 @@
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center py-4">
                 <div class="flex space-x-4">
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/admin/top') }}">時間管理</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/admin/top') }}">お知らせ管理</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/admin/top') }}">バナー管理</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/admin/curriculum_list') }}">授業管理</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ route('admin.show.article.list') }}">お知らせ管理</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/admin/banner_edit') }}">バナー管理</a>
                     </div>
                     <div class="block lg:hidden">
                         <button class="text-gray-500 focus:outline-none focus:text-gray-700" onclick="document.getElementById('navbarSupportedContent').classList.toggle('hidden')">
@@ -39,7 +39,7 @@
                             <!-- Authentication Links -->
                             @guest('admin')
                                 <li class="nav-item">
-                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('admin.auth.login') }}">{{ __('ログイン') }}</a>
+                                    <a class="text-gray-700 hover:text-gray-900" href="{{ route('admin.show.login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @else
                                 <li class="nav-item">
