@@ -48,6 +48,9 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
         Route::get('/password', [App\Http\Controllers\User\PasswordController::class, 'showPasswordFrom'])->name('show.password.edit');
         Route::post('/password', [App\Http\Controllers\User\PasswordController::class, 'updatePassword'])->name('update.password');
 
+        // お知らせ詳細画面
+        Route::get('/article/{id}', [App\Http\Controllers\User\ArticleController::class, 'showArticle'])->name('show.article');
+
         // 授業進捗画面
         Route::view('/progress', 'user.curriculum_progress')->name('show.progress');
 
