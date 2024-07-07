@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Grade; //追加
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user/top'; //修正
 
     /**
      * Create a new controller instance.
@@ -37,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:user'); //修正
     }
 
     /**
@@ -50,8 +51,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'name_kana' => ['required', 'string', 'max:255', 'name_kana'], //追加
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'between:8,255', 'confirmed'], //追加
         ]);
     }
 
@@ -63,10 +65,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $grade = Grade::all()->first(); //追加 最初の要素を取得
+
         return User::create([
             'name' => $data['name'],
+            'name_kana' => $data['name_kana'], //追加
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'grade_id' => $grade->id,  //追加 外部キー作成
         ]);
+    }
+
+    public function index()
+    {
+        return view('user.auth.register');
     }
 }

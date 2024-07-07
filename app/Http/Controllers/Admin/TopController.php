@@ -14,7 +14,7 @@ class TopController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.top'); //return view('admin.top.index');
     }
 
     /**

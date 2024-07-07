@@ -1,20 +1,15 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 
 @section('content')
-<!-- ログイン -->
 <div class="container">
-    <div class="d-flex justify-content-end nav h5">
-        <a class="nav-link active link-secondary" href="{{ route('register') }}">新規会員登録はこちら</a>
-    </div>
-
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header h1 text-center">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <!-- Formの送信先を変更,プラウザの検証機能無効 -->
-                    <form method="POST" action="{{ route('login.index') }}" novalidate>
+                    <form method="POST" action="{{ route('admin.login.index') }}">
+                        <!-- Formの送信先を変更 -->
                         @csrf
 
                         <div class="row mb-3">
@@ -45,7 +40,7 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row mb-3">
+                        <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -55,20 +50,20 @@
                                     </label>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary btn-lg col px-md-5">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
-                                <!-- パスワード再設定の遷移先変更
+                                <!-- パスワード再設定の遷移先変更 -->
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ url('user/password.request') }}">
+                                    <a class="btn btn-link" href="{{ url('admin/password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif -->
+                                @endif
                             </div>
                         </div>
                     </form>

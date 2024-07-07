@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Grade;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,6 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'name_kana' => ['required', 'string', 'max:255', 'name_kana'], //追加
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -63,10 +65,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $grade = Grade::all()->first(); //最初の要素を取得
         return User::create([
             'name' => $data['name'],
+            'name_kana' => $data['name_kana'], //追加
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'grade_id' => $grade->id,  //追加 外部キー作成
         ]);
     }
 }

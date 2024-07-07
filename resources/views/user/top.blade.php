@@ -1,12 +1,13 @@
-@extends('layouts.app')
+@extends('user.layouts.user')
 
 @section('content')
 <!-- トップページ -->
 <div class="container">
+    <h1 class="mb-4">top</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('お知らせ') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_image',
-        'grade_id',
+        'grade_id', //追加 外部キー作成
     ];
 
     /**

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\User; // 必要なモジュールを読込
 use App\Models\Banner; // モデルを現在のファイルで使用する宣言
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; //追記
 
 class TopController extends Controller
 {
@@ -89,4 +90,11 @@ class TopController extends Controller
     {
         //
     }
+
+    public function __construct() //未ログインでも特定のページにアクセス
+    {
+        $this->middleware('auth')
+            ->except('top');
+    }
+
 }

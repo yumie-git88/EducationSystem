@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // 追記
 
 class DeliveryController extends Controller
 {
@@ -14,7 +15,11 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::guard('users')->user()) {
+            return redirect()->route('user.top');
+        }
+
+        return view('user.auth.delivery');
     }
 
     /**

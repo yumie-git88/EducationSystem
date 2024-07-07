@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([ //呼び出せるように追記
+            UserSeeder::class,
+            AdminSeeder::class,
+        ]);
     }
 }

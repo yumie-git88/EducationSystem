@@ -22,9 +22,15 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            if($guard == "users" && Auth::guard($guard)->check()) { // 追記 認証済みの場合のリダイレクト先
+                return redirect('user/top');
             }
+            if($guard == "admins" && Auth::guard($guard)->check()) { // 追記
+                return redirect('admin/top');
+            }
+            // if (Auth::guard($guard)->check()) {
+            //     return redirect(RouteServiceProvider::HOME);
+            // }
         }
 
         return $next($request);

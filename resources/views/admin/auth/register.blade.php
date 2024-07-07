@@ -1,19 +1,15 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 
 @section('content')
-<!-- ユーザー新規登録 -->
 <div class="container">
-    <div class="d-flex justify-content-end nav h5">
-        <a class="nav-link active link-secondary" href="{{ route('login.index') }}">ログインはこちら</a>
-    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header h1 text-center">{{ __('new_member_registration') }}</div>
+                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <!-- Formの送信先を変更,プラウザの検証機能無効 -->
-                    <form method="POST" action="{{ route('register') }}" novalidate>
+                    <form method="POST" action="{{ route('admin/register') }}">
+                        <!-- Formの送信先を変更 -->
                         @csrf
 
                         <div class="row mb-3">
@@ -23,21 +19,6 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- カナ追加 -->
-                        <div class="row mb-3">
-                            <label for="name_kana" class="col-md-4 col-form-label text-md-end">{{ __('name_kana') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name_kana" type="text" class="form-control @error('name_kana') is-invalid @enderror" name="name_kana" value="{{ old('name_kana') }}" required autocomplete="name_kana" autofocus>
-
-                                @error('name_kana')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -82,8 +63,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary btn-lg col px-md-5">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>

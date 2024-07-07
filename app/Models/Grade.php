@@ -9,6 +9,16 @@ class Grade extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [ //データベースに追加や更新を許可
+        'id',
+        'name',
+    ];
+
     public function users() {
         return $this->hasMany(User::class);
     }
