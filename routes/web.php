@@ -52,7 +52,10 @@ Route::prefix('user')->namespace('User')->name('user.')->group(function () {
         Route::get('/article/{id}', [App\Http\Controllers\User\ArticleController::class, 'showArticle'])->name('show.article');
 
         // 授業進捗画面
-        Route::view('/progress', 'user.curriculum_progress')->name('show.progress');
+        Route::get('/progress', [App\Http\Controllers\User\ProgressController::class, 'showProgress'])->name('show.progress');
+
+        // 配信画面
+        Route::get('/delivery/{id}', [App\Http\Controllers\User\DeliveryController::class, 'showDelivery'])->name('show.delivery');
 
         // 授業一覧画面
         Route::view('/curriculum_list', 'user.curriculum_list')->name('show.curriculum');

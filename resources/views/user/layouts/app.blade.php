@@ -27,7 +27,7 @@
                 <div class="flex justify-between items-center py-4">
                     <div class="flex space-x-4">
                         <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/curriculum_list') }}">時間割</a>
-                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ url('/user/progress') }}">授業進捗</a>
+                        <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ route('user.show.progress') }}">授業進捗</a>
                         <a class="text-xl font-semibold text-gray-900 hover:text-gray-700" href="{{ route('user.show.profile') }}">プロフィール設定</a>
                     </div>
                     <div class="block lg:hidden">
