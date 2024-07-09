@@ -17,9 +17,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         Admin::create([
-          'name' => 'ユーザー1',
-          'kana' => 'ユーザーワン',
-          'email' => 'user1@user1.com',
+          'name' => 'アドミン1',
+          'kana' => 'アドミンワン',
+          'email' => 'admin1@admin1.com',
           'password' => Hash::make('password'),
           'created_at' => new DateTime(),
           'updated_at' => new DateTime()
