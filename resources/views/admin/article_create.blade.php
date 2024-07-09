@@ -11,6 +11,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <a class="text-2xl mt-4 ml-4" href="{{ route('admin.show.article.list') }}">{{ __('←戻る') }}</a>
                     <div class="text-4xl font-semibold mt-2 mb-4 ml-4">お知らせ登録</div>
                     <form id="form-area" class="" method="post" action="{{ route('admin.store.article.create') }}" enctype="multipart/form-data">

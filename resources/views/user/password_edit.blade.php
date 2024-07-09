@@ -11,6 +11,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <a class="text-2xl mt-4 ml-4" href="{{ route('user.show.profile') }}">{{ __('←戻る') }}</a>
                     <div class="text-4xl font-semibold mt-2 mb-4 ml-4">パスワード変更</div>
                     <form method="POST" action="{{ route('user.update.password') }}">
