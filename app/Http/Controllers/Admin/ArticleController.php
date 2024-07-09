@@ -40,6 +40,7 @@ class ArticleController extends Controller
             return to_route('admin.show.article.list')->with('status', 'お知らせを登録しました');
         } catch (\Exception $e) {
             DB::rollback();
+            report($e);
             return back()->with('error', '記事の登録に失敗しました');
         }
     }
@@ -62,6 +63,7 @@ class ArticleController extends Controller
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             DB::rollback();
+            report($e);
             return response()->json(['error' => '削除に失敗しました'], 500);
         }
     }
@@ -99,6 +101,7 @@ class ArticleController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
+            report($e);
             return back()->with('error', 'お知らせの変更に失敗しました');
         }
     }

@@ -71,6 +71,7 @@ class ProfileController extends Controller
     
         } catch (\Exception $e) {
             DB::rollback();
+            report($e);
             return back()->withErrors(['error' => '更新が失敗しました']);
         }
     }
