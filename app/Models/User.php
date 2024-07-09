@@ -45,6 +45,16 @@ class User extends Authenticatable
 
     public function grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class, 'grade_id', 'id');
+    }
+
+    public function classes_clear_checks()
+    {
+        return $this->hasMany(CurriculumClearCheck::class, 'users_id', 'id');
+    }
+
+    public function curricurum_progress()
+    {
+        return $this->hasMany(CurriculumProgress::class, 'users_id', 'id');
     }
 }

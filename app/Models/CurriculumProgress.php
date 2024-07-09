@@ -16,4 +16,14 @@ class CurriculumProgress extends Model
     ];
 
     protected $table = "curricurum_progress";
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function curriculum()
+    {
+        return $this->belongsTo(Curriculum::class, 'curriculums_id', 'id');
+    }
 }

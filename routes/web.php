@@ -20,8 +20,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::prefix('user')->namespace('User')->name('user.')->group(function () {
     Route::redirect('/', '/user/top');
 
