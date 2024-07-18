@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/top'; //修正
+    protected $redirectTo = '/user/top'; //修正2 ログインに成功後のリダイレクト先
 
     /**
      * Create a new controller instance.
@@ -74,6 +74,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('users')->logout();
+        $request->session()->invalidate(); //追加
         $request->session()->regenerateToken();
 
         return redirect()->route('login.index')->with([

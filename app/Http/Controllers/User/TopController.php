@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use App\Models\Banner; // モデルを現在のファイルで使用する宣言
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; //追記
+use Illuminate\Support\Facades\Auth; // 追記
+
 
 class TopController extends Controller
 {
+    // protected $redirectTo = '/user/top'; // ログインに成功後のリダイレクト先
+
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:user')->except('logout'); //修正
+    //     // $this->middleware('auth')->only('logout');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +25,11 @@ class TopController extends Controller
      */
     public function index()
     {
+        // if (Auth::guard('users')->user()) {
+        //     return redirect()->route('user.top'); //ログインしていたら表示
+        // }
+        // return view('user.top');
+        
         $banners = Banner::all();  // 全ての情報を取得
         $articles = Article::all();  
 
@@ -90,11 +103,4 @@ class TopController extends Controller
     {
         //
     }
-
-    public function __construct() //未ログインでも特定のページにアクセス
-    {
-        $this->middleware('auth')
-            ->except('top');
-    }
-
 }

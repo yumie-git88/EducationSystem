@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // 追記
+use App\Models\User;
+use App\Http\Controllers\Controller;
 
 class DeliveryController extends Controller
 {

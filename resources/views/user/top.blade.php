@@ -22,4 +22,7 @@
         </div>
     </div>
 </div>
+
+<!-- モーダルの設定 -->
+ 
 @endsection

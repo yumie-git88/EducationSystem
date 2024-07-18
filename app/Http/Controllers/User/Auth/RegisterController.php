@@ -4,10 +4,10 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Grade; //追加
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth; // 追記
 
 class RegisterController extends Controller
 {
@@ -29,17 +29,17 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/top'; //修正
+    protected $redirectTo = '/user/top'; //修正2 ログインに成功後のリダイレクト先
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest:user'); //修正
-    }
+    // /**
+    //  * Create a new controller instance.
+    //  *
+    //  * @return void
+    //  */
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:user'); //修正
+    // }
 
     /**
      * Get a validator for an incoming registration request.
@@ -55,6 +55,10 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'between:8,255', 'confirmed'], //追加
         ]);
+        if ($validator->fails()) {
+            Session::flash('errors', $validator->messages()); // エラーメッセージをセッションに保存
+            return redirect()->back()->withInput();
+        }
     }
 
     /**

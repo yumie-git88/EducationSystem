@@ -29,8 +29,17 @@
                 </button> -->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left Side Of Navbar /時間割/授業進捗/プロフィール設定-->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('時間割') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('授業進捗') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('プロフィール設定') }}</a>
+                        </li>
 
                     </ul>
 
@@ -44,13 +53,14 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                        @else
+                            @if (Route::has('login.logout'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('login.logout') }}">{{ __('Logout') }}</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="nav-item dropdown">
+                        
+                            <!-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -66,7 +76,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </li> -->
                         @endguest
                     </ul>
                 </div>

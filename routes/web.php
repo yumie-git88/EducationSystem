@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth; // 追記
 use App\Http\Controllers\User; // 追記
 use App\Http\Controllers\Admin; // 追記
 
@@ -25,12 +26,14 @@ Route::get('/', function () {
 
 // 以下ユーザーページ追記
 Route::get('login', [App\Http\Controllers\User\Auth\LoginController::class, 'index'])->name('login.index');
-Route::post('login', [App\Http\Controllers\User\Auth\LoginController::class, 'login'])->name('login.login');
-Route::get('logout', [App\Http\Controllers\User\Auth\LoginController::class, 'logout'])->name('login.logout');
+Route::group(['middleware' => ['web']], function () {
+  Route::post('login', [App\Http\Controllers\User\Auth\LoginController::class, 'login'])->name('login.login');
+  Route::get('logout', [App\Http\Controllers\User\Auth\LoginController::class, 'logout'])->name('login.logout');
+});
 
 Route::get('register', [App\Http\Controllers\User\Auth\RegisterController::class, 'index'])->name('register');
 
-Route::prefix('user')->middleware('auth.users:users')->group(function () {
+Route::prefix('user')->middleware('auth:users')->group(function () {
   Route::get('/', [App\Http\Controllers\User\TopController::class, 'index'])->name('user.top');
   Route::get('delivery', [App\Http\Controllers\User\Auth\RegisterController::class, 'index'])->name('user.delivery');
 });
@@ -41,7 +44,7 @@ Route::prefix('admin')->middleware('auth:admins')->group(function () {
     Route::post('login', [App\Http\Controllers\Admin\Auth\LoginController::class, 'login'])->name('admin.login.login');
     Route::get('logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('admin.login.logout');
 
-    Route::get('register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'index'])->name('admin.register');
+    // Route::get('register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'index'])->name('admin.register');
     
     Route::get('/', [App\Http\Controllers\Admin\TopController::class, 'index'])->name('admin.top'); //ログイン後のページ
 });

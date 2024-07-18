@@ -4,7 +4,7 @@
 <!-- ユーザー新規登録 -->
 <div class="container">
     <div class="d-flex justify-content-end nav h5">
-        <a class="nav-link active link-secondary" href="{{ route('login.index') }}">ログインはこちら</a>
+        <a class="nav-link active link-secondary" href="{{ url('/') }}">ログインはこちら</a>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +13,7 @@
 
                 <div class="card-body">
                     <!-- Formの送信先を変更,プラウザの検証機能無効 -->
-                    <form method="POST" action="{{ route('register') }}" novalidate>
+                    <form id="form" method="POST" action="{{ route('register') }}" novalidate>
                         @csrf
 
                         <div class="row mb-3">
@@ -83,9 +83,58 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-primary btn-lg col px-md-5">
+                                <!-- <button type="submit" class="btn btn-primary btn-lg col px-md-5">
+                                    {{ __('Register') }}
+                                </button> -->
+
+                                <!-- モーダルを開く登録ボタン -->
+                                <button type="button" name="btnModal" id="btnModal" class="btn btn-primary btn-lg col px-md-5" data-bs-toggle="modal" data-bs-target="#registerModal">
                                     {{ __('Register') }}
                                 </button>
+                            </div>
+                        </div>
+
+                        <!-- モーダル内容 -->
+                        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title" id="modalLabel"><h4>入力内容の確認</h4></div>
+                                        <div class="text-black-60"><p class="p-4">登録内容はこちらでよろしいですか？</p></div>
+                                    </div>
+                                    <input id="id" type="hidden" name="project_id" value="" />
+                                    <div class="modal-body">
+
+                                        <table class="table" id="register_table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>ユーザーネーム</td>
+                                                    <td id="modalName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>カナ</td>
+                                                    <td id="modalKana"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>メールアドレス</td>
+                                                    <td id="modalEmail"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>パスワード</td>
+                                                    <td id="modalPassword">
+                                                        @error('password')
+                                                            <p>********</p>
+                                                        @enderror
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">閉じる</button>
+                                        <button type="submit" class="btn btn-primary">OK</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

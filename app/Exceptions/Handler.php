@@ -53,10 +53,10 @@ class Handler extends ExceptionHandler
     if($request->expectsJson()) {
         return respomse()->json(['message' => $exception->getMessage()],401);
     }
-    if($request->is('user') || $request->is('user/*')){
+    if($request->is('users') || $request->is('users/*')){
         return redirect()->guest('/user/login');
     }
-    if($request->is('admin') || $request->is('admin/*')){
+    if($request->is('admins') || $request->is('admins/*')){
         return redirect()->guest('/admin/login');
     }
     return redirect()->guest($exception->redirectTo ?? route('login.index')); //追記　.index

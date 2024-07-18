@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Http\Controllers;
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use App\Models\Curriculum; // モデルを現在のファイルで使用する宣言
