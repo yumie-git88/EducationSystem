@@ -12,7 +12,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showProfileForm()
     {
         return view('user.profile_edit');
     }

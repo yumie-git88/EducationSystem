@@ -83,10 +83,6 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-5">
-                                <!-- <button type="submit" class="btn btn-primary btn-lg col px-md-5">
-                                    {{ __('Register') }}
-                                </button> -->
-
                                 <!-- モーダルを開く登録ボタン -->
                                 <button type="button" name="btnModal" id="btnModal" class="btn btn-primary btn-lg col px-md-5" data-bs-toggle="modal" data-bs-target="#registerModal">
                                     {{ __('Register') }}

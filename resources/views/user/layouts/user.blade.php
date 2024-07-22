@@ -21,13 +21,6 @@
         <!-- 共通レイアウト・共通ヘッダー -->
         <nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
             <div class="container">
-                <!-- <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a> -->
-                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar /時間割/授業進捗/プロフィール設定-->
                     <ul class="navbar-nav me-auto">
@@ -41,17 +34,6 @@
                             <button type="button" class="btn btn-success" onclick="location.href='{{ route('show.profile') }}' ">{{ __('プロフィール設定') }}</button>
                         </li>
                     </ul>
-                    <!-- <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('時間割') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('授業進捗') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login.index') }}">{{ __('プロフィール設定') }}</a>
-                        </li>
-                    </ul> -->
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -62,31 +44,12 @@
                                     <a class="nav-link" href="{{ route('login.index') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
                         @else
                             @if (Route::has('login.logout'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login.logout') }}">{{ __('Logout') }}</a>
                                 </li>
                             @endif
-                        
-                            <!-- <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('login.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('login.logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li> -->
                         @endguest
                     </ul>
                 </div>

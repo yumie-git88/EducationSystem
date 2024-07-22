@@ -3,17 +3,28 @@
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
+use App\Models\Article; //追加
+use App\Http\Controllers\Controller; //追加
+use Illuminate\Support\Facades\Auth; // 追加
 
 class ArticleController extends Controller
 {
+    public function __construct() //追加
+    {
+        $this->middleware('guest:user')->except('logout');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showArticle() //詳細画面の表示
     {
-        //
+        // $article = Article::find($id);
+        $articles = Article::all();
+
+        return view('user.article', compact('articles'));
     }
 
     /**

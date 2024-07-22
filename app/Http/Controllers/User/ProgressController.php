@@ -12,7 +12,7 @@ class ProgressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showProgress()
     {
         return view('user.curriculum_progress');
     }

@@ -3,24 +3,27 @@
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // 追記
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth; // 追記
 
 class DeliveryController extends Controller
 {
+    public function __construct() //追加
+    {
+        $this->middleware('guest:user')->except('logout');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showDelivery()
     {
-        if (Auth::guard('users')->user()) {
-            return redirect()->route('user.top');
-        }
+        // $delivery = Delivery::all();
 
-        return view('user.auth.delivery');
+        return view('user.delivery'); //, compact('delivery')
     }
 
     /**

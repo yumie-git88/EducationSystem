@@ -31,14 +31,15 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('logout', [App\Http\Controllers\User\Auth\LoginController::class, 'logout'])->name('login.logout');
 });
 
-Route::get('register', [App\Http\Controllers\User\Auth\RegisterController::class, 'index'])->name('register');
+Route::get('register', [App\Http\Controllers\User\Auth\RegisterController::class, 'showRegisterForm'])->name('register'); //ユーザー新規登録画面
 
 Route::prefix('user')->middleware('auth:users')->group(function () {
-  Route::get('/', [App\Http\Controllers\User\TopController::class, 'index'])->name('user.top');
-  Route::get('delivery', [App\Http\Controllers\User\DeliveryController::class, 'index'])->name('user.delivery'); //配信ページ
-  Route::get('curriculum_list', [App\Http\Controllers\User\CurriculumController::class, 'index'])->name('show.curriculum'); //時間割画面
-  Route::get('progress', [App\Http\Controllers\User\ProgressController::class, 'index'])->name('show.progress'); //授業進捗画面
-  Route::get('profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('show.profile'); //プロフィール設定画面
+  Route::get('/', [App\Http\Controllers\User\TopController::class, 'showTop'])->name('user.top');
+  Route::get('curriculum_list', [App\Http\Controllers\User\CurriculumController::class, 'showCurriculumList'])->name('show.curriculum'); //時間割画面
+  Route::get('progress', [App\Http\Controllers\User\ProgressController::class, 'showProgress'])->name('show.progress'); //授業進捗画面
+  Route::get('profile', [App\Http\Controllers\User\ProfileController::class, 'showProfileForm'])->name('show.profile'); //プロフィール設定画面
+  Route::get('article/{id}', [App\Http\Controllers\User\ArticleController::class, 'showArticle'])->name('show.article'); //お知らせ詳細ページ
+  Route::get('delivery', [App\Http\Controllers\User\DeliveryController::class, 'showDelivery'])->name('show.delivery'); //配信ページ
 });
 
 // 以下管理ページ追記

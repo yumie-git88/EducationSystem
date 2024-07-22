@@ -8,6 +8,7 @@
             <!-- テーブルのバナー画像を表示 -->
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
+                    <!-- バナー切り替えボタン -->
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active rounded-circle p-0 img-fluid"
                         style="width:1rem;height:1rem;" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="rounded-circle p-0 img-fluid"
@@ -16,17 +17,9 @@
                         style="width:1rem;height:1rem;" aria-label="Slide 3"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" class="rounded-circle p-0 img-fluid"
                         style="width:1rem;height:1rem;" aria-label="Slide 4"></button>
-                    <!-- @foreach($banners as $banner)
-                        @if($banner->id==1)
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active rounded-circle p-0 img-fluid"
-                                style="width:1rem;height:1rem;" aria-current="true" aria-label="Slide{{ $banner->id }}"></button>
-                        @else
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $banner->id }}" class="rounded-circle p-0 img-fluid"
-                                style="width:1rem;height:1rem;" aria-label="Slide{{ $banner->id }}"></button>
-                        @endif
-                    @endforeach -->
                 </div>
                 <div class="carousel-inner">
+                    <!-- バナー画像 -->
                     @foreach($banners as $banner)
                         @if($banner->id==1)
                             <div class="carousel-item active">
@@ -48,59 +41,18 @@
                     <span class="sr-only">次へ</span>
                 </a>
             </div>
-            
-            <!-- バナー画像 インディケーター付き {{ asset('/storage/app/public/images/banner/1200x400.png') }}-->
-            <!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active rounded-circle p-0 img-fluid"
-                        style="width:1rem;height:1rem;" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="rounded-circle p-0 img-fluid"
-                        style="width:1rem;height:1rem;" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="rounded-circle p-0 img-fluid"
-                        style="width:1rem;height:1rem;" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" class="rounded-circle p-0 img-fluid"
-                        style="width:1rem;height:1rem;" aria-label="Slide 4"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ $banner->image }}?auto=yes&bg=777&fg=555&text=First-slide" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ $banner->image }}?auto=yes&bg=666&fg=444&text=Second-slide" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ $banner->image }}?auto=yes&bg=555&fg=333&text=Third-slide" alt="Third slide">
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ $banner->image }}?auto=yes&bg=444&fg=222&text=Fourth-slide" alt="Fourth slide">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">前へ</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">次へ</span>
-                </a>
-            </div> -->
-            
+
             <!-- お知らせ -->
             <div class="my-10">
                 <h3 class="mb-2 mt-4"><div>お知らせ</div></h3>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <!-- @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif -->
                     @if (filled($articles))
                         @foreach($articles as $article)
                             <div class="col row">
                                 <div class="col-3">{{ $article->posted_date->format('Y年m月d日') }}</div>
-                                <div class="col-9"><a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $article->title }}</a></div>
+                                <div class="col-9"><a href="{{ route('show.article', ['id'=>$article->id]) }}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $article->title }}</a></div>
                             </div>
                         @endforeach
                     @endif

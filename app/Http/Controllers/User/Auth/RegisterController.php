@@ -80,7 +80,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function index()
+    public function showRegisterForm()
     {
         return view('user.auth.register');
     }

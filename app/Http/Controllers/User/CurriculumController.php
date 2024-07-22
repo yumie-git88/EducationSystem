@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User; // 必要なモジュールを読込
 use App\Models\Curriculum; // モデルを現在のファイルで使用する宣言
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; //追加
+use Illuminate\Support\Facades\Auth; // 追加
 
 class CurriculumController extends Controller
 {
@@ -13,13 +14,13 @@ class CurriculumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showCurriculumList()
     {
         // $curriculums = Curriculum::all();  // 全ての情報を取得
 
         // return view('show.curriculum', compact('curriculums')); // 一覧画面を表示
 
-        return view('user.curriculum_list');
+        return view('user.curriculum_list'); //, compact('curriculums')
     }
 
     /**

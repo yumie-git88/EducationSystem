@@ -18,22 +18,16 @@ class TopController extends Controller
         $this->middleware('guest:user')->except('logout'); //修正
         // $this->middleware('auth')->only('logout');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showTop()
     {
-        // if (Auth::guard('users')->user()) {
-        //     return redirect()->route('user.top'); //ログインしていたら表示
-        // }
-        
         $banners = Banner::all();  // 情報を取得
         $articles = Article::all();
-
-        // $banners = Banner::orderBy("id", "desc")->get();
 
         return view('user.top', compact('banners', 'articles')); // userディレクトリのTOP画面に情報を渡す "images" => $banners
     }
