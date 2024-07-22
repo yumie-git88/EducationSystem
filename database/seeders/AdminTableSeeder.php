@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB; // 追加
 use Illuminate\Support\Facades\Hash; // 追加 パスワードをハッシュ化
 
-class UserSeeder extends Seeder
+class AdminTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,14 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([ //テストデータ追加
+        DB::table('admins')->insert([ // テストデータ追加
             [
-              'name' => 'admin',
-              'name_kana' => 'アドミン',
-              'email' => 'test@gmail.com',
-              'password' => Hash::make('password'),
-              'profile_image' => NULL,
-              'grade_id' => '1',
+                'name' => 'admin',
+                'kana' => 'アドミン',
+                'email' => 'developer@gmail.com',
+                'password' => Hash::make('password'),
             ],
         ]);
     }

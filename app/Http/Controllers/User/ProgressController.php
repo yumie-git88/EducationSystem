@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; //追加
 
 class ProgressController extends Controller
 {
@@ -13,7 +14,7 @@ class ProgressController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.curriculum_progress');
     }
 
     /**

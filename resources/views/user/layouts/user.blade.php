@@ -19,7 +19,7 @@
 <body>
     <div id="app">
         <!-- 共通レイアウト・共通ヘッダー -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
             <div class="container">
                 <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -31,6 +31,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar /時間割/授業進捗/プロフィール設定-->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item m-2">
+                            <button type="button" class="btn btn-success" onclick="location.href='{{ route('show.curriculum') }}' ">{{ __('時間割') }}</button>
+                        </li>
+                        <li class="nav-item m-2">
+                            <button type="button" class="btn btn-success" onclick="location.href='{{ route('show.progress') }}' ">{{ __('授業進捗') }}</button>
+                        </li>
+                        <li class="nav-item m-2">
+                            <button type="button" class="btn btn-success" onclick="location.href='{{ route('show.profile') }}' ">{{ __('プロフィール設定') }}</button>
+                        </li>
+                    </ul>
+                    <!-- <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login.index') }}">{{ __('時間割') }}</a>
                         </li>
@@ -40,8 +51,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login.index') }}">{{ __('プロフィール設定') }}</a>
                         </li>
-
-                    </ul>
+                    </ul> -->
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

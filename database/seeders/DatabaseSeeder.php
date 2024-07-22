@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB; //追加
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,8 +23,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([ //呼び出せるように追記
-            UserSeeder::class,
-            AdminSeeder::class,
+            // UserTableSeeder::class,
+            // AdminTableSeeder::class,
+            ArticlesTableSeeder::class, //追記
+            BannersTableSeeder::class, //追記
         ]);
     }
 }

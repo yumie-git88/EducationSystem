@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User; // 必要なモジュールを読込
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller; //追加
 
-class ProfileController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('user.profile_edit');
+        //
     }
 
     /**

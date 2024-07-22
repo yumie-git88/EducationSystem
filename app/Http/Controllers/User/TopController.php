@@ -7,17 +7,18 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; //追記
 use Illuminate\Support\Facades\Auth; // 追記
-
+use Carbon\Carbon; // 追記
 
 class TopController extends Controller
 {
     // protected $redirectTo = '/user/top'; // ログインに成功後のリダイレクト先
 
-    // public function __construct()
-    // {
-    //     $this->middleware('guest:user')->except('logout'); //修正
-    //     // $this->middleware('auth')->only('logout');
-    // }
+    public function __construct()
+    {
+        $this->middleware('guest:user')->except('logout'); //修正
+        // $this->middleware('auth')->only('logout');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -28,13 +29,13 @@ class TopController extends Controller
         // if (Auth::guard('users')->user()) {
         //     return redirect()->route('user.top'); //ログインしていたら表示
         // }
-        // return view('user.top');
         
-        $banners = Banner::all();  // 全ての情報を取得
-        $articles = Article::all();  
+        $banners = Banner::all();  // 情報を取得
+        $articles = Article::all();
 
-        return view('user.top', compact('banners', 'articles')); // userディレクトリのTOP画面に情報を渡す
+        // $banners = Banner::orderBy("id", "desc")->get();
 
+        return view('user.top', compact('banners', 'articles')); // userディレクトリのTOP画面に情報を渡す "images" => $banners
     }
 
     /**

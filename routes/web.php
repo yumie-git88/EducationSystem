@@ -35,7 +35,10 @@ Route::get('register', [App\Http\Controllers\User\Auth\RegisterController::class
 
 Route::prefix('user')->middleware('auth:users')->group(function () {
   Route::get('/', [App\Http\Controllers\User\TopController::class, 'index'])->name('user.top');
-  Route::get('delivery', [App\Http\Controllers\User\Auth\RegisterController::class, 'index'])->name('user.delivery');
+  Route::get('delivery', [App\Http\Controllers\User\DeliveryController::class, 'index'])->name('user.delivery'); //配信ページ
+  Route::get('curriculum_list', [App\Http\Controllers\User\CurriculumController::class, 'index'])->name('show.curriculum'); //時間割画面
+  Route::get('progress', [App\Http\Controllers\User\ProgressController::class, 'index'])->name('show.progress'); //授業進捗画面
+  Route::get('profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('show.profile'); //プロフィール設定画面
 });
 
 // 以下管理ページ追記

@@ -1,7 +1,7 @@
 @extends('user.layouts.user')
 
 @section('content')
-<!-- 配信ページ -->
+<!-- プロフィール設定ページ -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +13,7 @@
                         </div>
                     @endif
 
-                    {{ __('配信ページ') }}
+                    {{ __('プロフィール設定ページ') }}
                 </div>
             </div>
         </div>
