@@ -25,8 +25,11 @@ class DatabaseSeeder extends Seeder
         $this->call([ //呼び出せるように追記
             // UserTableSeeder::class,
             // AdminTableSeeder::class,
-            ArticlesTableSeeder::class, //追記
-            BannersTableSeeder::class, //追記
+            // ArticlesTableSeeder::class, //追記
+            // BannersTableSeeder::class, //追記
+            // CurriculumsTableSeeder::class, //追記
+            CurriculumProgressTableSeeder::class, //追記
+            DeliveryTimesTableSeeder::class, //追記
         ]);
     }
 }

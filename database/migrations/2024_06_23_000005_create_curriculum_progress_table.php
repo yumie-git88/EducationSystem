@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('curricurum_progress', function (Blueprint $table) {
+        Schema::create('curriculum_progress', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('curriculumus_id')->constrained('curriculums');
             $table->foreignId('users_id')->constrained('users');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('curricurum_progress');
+        Schema::dropIfExists('curriculum_progress');
     }
 };

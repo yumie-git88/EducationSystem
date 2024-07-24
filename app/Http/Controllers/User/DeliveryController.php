@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth; // 追記
 
 class DeliveryController extends Controller
 {
-    public function __construct() //追加
-    {
-        $this->middleware('guest:user')->except('logout');
-    }
+    // public function __construct() //追加
+    // {
+    //     $this->middleware('guest:user')->except('logout');
+    // }
 
     /**
      * Display a listing of the resource.
