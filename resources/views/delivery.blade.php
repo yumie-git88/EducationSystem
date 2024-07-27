@@ -17,6 +17,17 @@
     <main>
         <h2>{{ $curriculum->title }} の配信日時設定</h2>
 
+        <!-- エラーメッセージ表示 -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- 日時入力行 -->
         <form action="{{ route('save_delivery_times', ['id' => $curriculum->id]) }}" method="POST" enctype="multipart/form-data" id="deliveryForm">
             @csrf
@@ -26,11 +37,11 @@
                 @if(isset($existingDeliveryTimes))
                     @foreach($existingDeliveryTimes as $dateTime)
                         <div class="datetime-row">
-                            <input type="date" name="start_dates[]" value="{{ $dateTime['start_date'] }}">
-                            <input type="time" name="start_times[]" value="{{ $dateTime['start_time'] }}">
+                            <input type="date" name="start_dates[]" value="{{ old('start_dates.'.$loop->index, $dateTime['start_date']) }}">
+                            <input type="time" name="start_times[]" value="{{ old('start_times.'.$loop->index, $dateTime['start_time']) }}">
                             ～
-                            <input type="date" name="end_dates[]" value="{{ $dateTime['end_date'] }}">
-                            <input type="time" name="end_times[]" value="{{ $dateTime['end_time'] }}">
+                            <input type="date" name="end_dates[]" value="{{ old('end_dates.'.$loop->index, $dateTime['end_date']) }}">
+                            <input type="time" name="end_times[]" value="{{ old('end_times.'.$loop->index, $dateTime['end_time']) }}">
                             <button class="remove-btn" type="button">削除</button>
                         </div>
                     @endforeach

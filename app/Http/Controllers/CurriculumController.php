@@ -23,48 +23,55 @@ class CurriculumController extends Controller
 
     // 新しい授業登録
     public function newList(Request $request)
-    {
-        $grades = Grade::all();
+{
+    $grades = Grade::all();
 
-        if ($request->isMethod('post')) {
-            $request->validate([
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'title' => 'required',
-                'grade_id' => 'required|exists:grades,id',
-                'description' => 'nullable',
-                'url' => 'required|url',
-                'alway_delivery_flg' => 'nullable|boolean',
-            ]);
+    if ($request->isMethod('post')) {
+        $request->validate([
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'title' => 'required|max:100',
+            'grade_id' => 'required|exists:grades,id',
+            'description' => 'nullable|max:100',
+            'url' => 'required|url',
+            'alway_delivery_flg' => 'nullable|boolean',
+        ], [
+           'thumbnail.required' => '画像は必須です。',
+            'thumbnail.image' => '画像ファイルを選択してください。',
+            'thumbnail.mimes' => '画像の形式はjpeg, png, jpg, gifのいずれかである必要があります。',
+            'thumbnail.max' => '画像のサイズは2MB以下でなければなりません。',
+            'title.max' => '授業名は100文字以内で入力してください。',
+            'description.max' => '授業内容は100文字以内で入力してください。',
+            'url' => '有効なURLで入力してください。',
+        ]);
 
-            $productData = [
-                'title' => $request->input('title'),
-                'grade_id' => $request->input('grade_id'),
-                'description' => $request->input('description'),
-                'video_url' => $request->input('url'),
-                'alway_delivery_flg' => $request->has('alway_delivery_flg') ? true : false,
-            ];
+        $productData = [
+            'title' => $request->input('title'),
+            'grade_id' => $request->input('grade_id'),
+            'description' => $request->input('description'),
+            'video_url' => $request->input('url'),
+            'alway_delivery_flg' => $request->has('alway_delivery_flg') ? true : false,
+        ];
 
-            if ($request->hasFile('thumbnail')) {
-                $image = $request->file('thumbnail');
-                $file_name = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/images', $file_name);
-                $productData['thumbnail'] = 'storage/images/' . $file_name;
-            }
-
-            DB::beginTransaction();
-            try {
-                $curriculum = Curriculum::create($productData);
-                DB::commit();
-                return redirect()->route('curriculum_list')->with('success', '授業が登録されました。');
-            } catch (\Exception $e) {
-                DB::rollback();
-                return redirect()->back()->withErrors(['error' => '授業の登録に失敗しました。']);
-            }
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+            $file_name = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/images', $file_name);
+            $productData['thumbnail'] = 'storage/images/' . $file_name;
         }
 
-        return view('curriculum_create', compact('grades'));
+        DB::beginTransaction();
+        try {
+            $curriculum = Curriculum::create($productData);
+            DB::commit();
+            return redirect()->route('curriculum_list')->with('success', '授業が登録されました。');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('curriculum_create')->withInput(); 
+        }
     }
 
+    return view('curriculum_create', compact('grades'));
+}
 
     //選択した学年に対応する授業表示
     public function showCourses($grade_id)
@@ -102,13 +109,21 @@ class CurriculumController extends Controller
   public function update(Request $request, $id)
   {
       $request->validate([
-          'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-          'title' => 'required',
-          'grade_id' => 'required|exists:grades,id',
-          'description' => 'nullable',
-          'video_url' => 'required|url',
-          'alway_delivery_flg' => 'nullable|boolean',
-      ]);
+        'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'title' => 'required|max:100', 
+        'grade_id' => 'required|exists:grades,id',
+        'description' => 'nullable|max:100', 
+        'video_url' => 'required|url',
+        'alway_delivery_flg' => 'nullable|boolean',
+    ], [
+        'title.required' => '授業名は必ず入力してください。',
+        'title.max' => '授業名は100文字以内で入力してください。',
+        'grade_id.required' => '学年を選択してください。',
+        'grade_id.exists' => '選択された学年は存在しません。',
+        'description.max' => '授業概要は100文字以内で入力してください。',
+        'video_url.required' => '動画URLは必ず入力してください。',
+        'video_url.url' => '正しい形式のURLを入力してください。',
+    ]);
 
       $curriculum = Curriculum::findOrFail($id);
 

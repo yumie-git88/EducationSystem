@@ -88,33 +88,42 @@ header .nav .menu li a{
   
 
   /* 授業一覧の表示について */
-  .wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-  
-  .item {
-    width: calc((80% - 30px * 2) / 3);
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 20px; 
-    box-sizing: border-box;
-  }
-
-    
-  @media not all and (min-width: 768px) {
-    .item {
-      width: 100%;
-    }
-  }
-  
-  .item img {
-    max-width: 100%; /* コンテナの幅に合わせて画像を縮小 */
-    height: auto; /* アスペクト比を保つために自動調整 */
-    display: block; /* インライン要素としてではなく、ブロック要素として扱う */
-    margin-bottom: 10px; /* 画像の下に余白を設定 */
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
+
+.item {
+  width: calc((80% - 30px * 2) / 3);
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px; 
+  box-sizing: border-box;
+}
+
+@media not all and (min-width: 768px) {
+  .item {
+    width: 100%;
+  }
+}
+
+.item img {
+  max-width: 100%; /* コンテナの幅に合わせて画像を縮小 */
+  height: auto; /* アスペクト比を保つために自動調整 */
+  display: block; /* インライン要素としてではなく、ブロック要素として扱う */
+  margin-bottom: 10px; /* 画像の下に余白を設定 */
+}
+
+/* コンテンツのブロックに対するスタイル */
+.body {
+  display: flex; /* Flexboxを使用 */
+  flex-direction: column; /* 縦方向に並べる */
+  align-items: flex-start; /* 上に寄せる */
+  min-height: 20vh; /* 画面の40%の高さを指定 */
+  overflow: auto; /* 内容がはみ出たときにスクロールバーを表示 */
+}
+
 
 
 /* mainのとこのボタン */
