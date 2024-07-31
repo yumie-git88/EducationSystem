@@ -20,10 +20,17 @@ class DeliveryTimesTableSeeder extends Seeder
         DB::table('delivery_times')->insert([
             [
                 'curriculums_id' => 1,
-                'delivery_from' =>  date('Y-m-d'), //公開開始日
-                'delivery_to' =>  date('Y-m-d'), //公開終了日
-                'created_at' => date('Y-m-d'),
-                'updated_at' => date('Y-m-d'),
+                'delivery_from' => date('Y-m-d H:i'), //公開開始日
+                'delivery_to' => date('Y-m-d H:i'), //公開終了日
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'curriculums_id' => 2,
+                'delivery_from' => date('Y-m-d H:i'), //公開開始日
+                'delivery_to' => date('Y-m-d H:i'), //公開終了日
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
             ],
         ]);
     }

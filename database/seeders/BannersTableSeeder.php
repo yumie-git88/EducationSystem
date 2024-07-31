@@ -18,8 +18,23 @@ class BannersTableSeeder extends Seeder
         DB::table('banners')->insert([
             [
                 'image' => 'https://placehold.it/1200x400',
-                'created_at' => date('Y-m-d'),
-                'updated_at' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'image' => 'https://placehold.it/1200x400',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'image' => 'https://placehold.it/1200x400',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'image' => 'https://placehold.it/1200x400',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
             ],
         ]);
     }

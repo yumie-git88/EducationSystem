@@ -11,6 +11,12 @@ class DeliveryTime extends Model
 
     protected $table = 'delivery_times';
 
+    protected $fillable = [ //データベースに追加や更新を許可
+        'curriculums_id',
+        'delivery_from',
+        'delivery_to',
+    ];
+
     public function grade() {
         return $this->belongsTo(Grade::class);
     }

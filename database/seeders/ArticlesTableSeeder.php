@@ -20,8 +20,36 @@ class ArticlesTableSeeder extends Seeder
                 'title' => 'お知らせタイトル',
                 'posted_date' => date('Y年m月d日 H:i:s'),
                 'article_contents' => '授業内容更新についてのお知らせ',
-                'created_at' => date('Y-m-d'),
-                'updated_at' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'title' => 'お知らせタイトル',
+                'posted_date' => date('Y年m月d日 H:i:s'),
+                'article_contents' => '授業内容更新についてのお知らせ',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'title' => 'お知らせタイトル',
+                'posted_date' => date('Y年m月d日 H:i:s'),
+                'article_contents' => '授業内容更新についてのお知らせ',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'title' => 'お知らせタイトル',
+                'posted_date' => date('Y年m月d日 H:i:s'),
+                'article_contents' => '授業内容更新についてのお知らせ',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'title' => 'お知らせタイトル',
+                'posted_date' => date('Y年m月d日 H:i:s'),
+                'article_contents' => '授業内容更新についてのお知らせ',
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
             ],
         ]);
     }

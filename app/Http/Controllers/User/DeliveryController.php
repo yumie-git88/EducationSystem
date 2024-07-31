@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\User; // 必要なモジュールを読込
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Curriculum; // 追記
+use App\Models\Grade; // 追記
+use App\Models\User; // 追記
+use App\Models\DeliveryTime; // 追記
+use App\Models\CurricurumProgress; // 追記
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth; // 追記
+use Carbon\Carbon; // 追記
 
 class DeliveryController extends Controller
 {
@@ -19,11 +24,70 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showDelivery()
+    public function showDelivery($id)
     {
-        // $delivery = Delivery::all();
+        $curriculums = Curriculum::find($id); //id指定
+        $grades = Grade::all();
+        $curricurum_progress = CurricurumProgress::find($id);
 
-        return view('user.delivery'); //, compact('delivery')
+        if(!$curriculums){ //データがない場合リダイレクト
+            return redirect()->route('user.top');
+        }
+
+        $nowTime = Carbon::now(); //現在時刻の取得
+        $deliveryTimes = DeliveryTime::find($id);
+        $startTime = $deliveryTimes->delivery_from;
+        $endTime = $deliveryTimes->delivery_to;
+
+        if($nowTime >= $startTime && $nowTime <= $endTime) {
+            $deliveryTime = 1; //現在時刻が時間内
+        } else {
+            $deliveryTime = 0; //時間外
+        }
+
+        return view('user.delivery', compact('curriculums', 'grades', 'deliveryTime','curricurum_progress'));
+    }
+
+    public function updateDelivery(Request $request, $id)
+    {
+        DB::beginTransaction();
+        
+        try {
+            // データベース接続情報
+            $servername = "localhost";
+            $username = "root";
+            $password = "root";
+            $dbname = "influencer_education";
+    
+            // データベースへの接続 mysqliを使用する場合、クラス名の前に\を付けて全域の名前空間を指定
+            $conn = new \mysqli($servername, $username, $password, $dbname);
+
+            if ($conn->connect_error) { // 接続エラーチェック
+                die("Connection failed: " . $conn->connect_error);
+            }
+    
+            $flgId = Curriculum::find($id)->id; //idを取得
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // clear_flg を 1 に更新する SQL
+                $sql = $conn->prepare("UPDATE curricurum_progress SET clear_flg = 1 WHERE id = ?");
+                $sql->bind_param("i", $flgId);
+        
+                // クエリの実行
+                if ($sql->execute() === TRUE) {
+                    // echo "Record updated successfully";
+                    header("Refresh:0");
+                } else {
+                    echo "Error updating record: " . $sql->error;
+                }
+
+                $sql->close();// 接続のクローズ
+                $conn->close();
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            header("Location: delivery/{id}"); // エラーが発生した場合リダイレクト
+            exit();
+        }
     }
 
     /**
@@ -65,18 +129,6 @@ class DeliveryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
     {
         //
     }

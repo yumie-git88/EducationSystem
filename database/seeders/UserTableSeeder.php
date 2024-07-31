@@ -16,15 +16,15 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert([ //テストデータ追加
-        //     [
-        //       'name' => 'admin',
-        //       'name_kana' => 'アドミン',
-        //       'email' => 'test@gmail.com',
-        //       'password' => Hash::make('password'),
-        //       'profile_image' => NULL,
-        //       'grade_id' => '1',
-        //     ],
-        // ]);
+        DB::table('users')->insert([ //テストデータ追加
+            [
+              'name' => 'admin',
+              'name_kana' => 'アドミン',
+              'email' => 'test@gmail.com',
+              'password' => Hash::make('password'),
+              'profile_image' => NULL,
+              'grade_id' => '1',
+            ],
+        ]);
     }
 }

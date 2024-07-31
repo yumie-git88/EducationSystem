@@ -34,4 +34,3 @@ function validateForm(e) { //バリデーション
     return true; // すべてのチェックがパスした場合は true を返す
   }
 }
-

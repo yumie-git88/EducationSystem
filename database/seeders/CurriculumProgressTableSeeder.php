@@ -15,13 +15,13 @@ class CurriculumProgressTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('curriculum_progress')->insert([
+        DB::table('curricurum_progress')->insert([ //スペル注意
             [
-                'curriculums_id' => 1,
+                'curriculumus_id' => 1, //スペル注意
                 'users_id' => 1,
                 'clear_flg' => 0, //未クリア
-                'created_at' => date('Y-m-d'),
-                'updated_at' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
             ],
         ]);
     }

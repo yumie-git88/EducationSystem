@@ -3,45 +3,60 @@
 @section('content')
 <!-- 配信ページ -->
 <div class="container">
-    <button type="button" class="btn btn-outline-secondary" onClick="history.back()"><i class="bi bi-arrow-left"></i>戻る</button>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="row mb-8">
-                <!-- 配信動画 -->
-                <div class="col-7">
-                    <video class="col-12" controls muted preload="none" oncontextmenu="return false;">
-                        <source src="https://www.nhk.or.jp/das/movie/D0002160/D0002160257_00000_V_000.mp4" type="video/mp4">
-                    </video>
+    <div>
+        <button type="button" class="btn btn-outline-secondary mb-4" onClick="history.back()"><i class="bi bi-arrow-left"></i>戻る</button>
+    </div>
+    <div class="justify-content-center">
+        <div class="container">
+            <div class="row">
+                <!-- 配信動画/画像 -->
+                <div class="col-md-7">
+                    @if($curriculums->alway_delivery_flg == 0 || $deliveryTime == 0)
+                        <!-- 動画非公開 -->
+                        <div class="video_img"><img src="{{ asset('storage/images/video_img/D0002160257_00000_S_002.jpg')}}" class="img-fluid" alt="配信非公開"></div>
+                    @elseif($curriculums->alway_delivery_flg == 1)
+                        <!-- 動画公開 -->
+                        <div class="video">
+                            <video class="w-100" controls muted preload="none" oncontextmenu="return false;">
+                                <source src="{{ $curriculums->video_url }}" type="video/mp4">
+                            </video>
+                        </div>
+                    @endif
                 </div>
-    
-                @if(1)
-                    <!-- 受講ボタン -->
-                    <div class="col-5 my-auto">
-                        <button type="button" class="btn btn-warning btn-lg rounded-pill" onClick="history.back()">受講しました</button>
-                    </div>
-                @else
-                    <!-- 受講ボタン受講後 無効化 -->
-                    <div class="col-5 my-auto">
-                        <button type="button" class="btn btn-success btn-lg rounded-pill" disabled>
-                            <i class="bi bi-check-lg"></i>受講しました</button>
-                    </div>
-                @endif
-                    <!-- 受講ボタン非公開 無効化 -->
-                    <div class="col-5 my-auto">
-                        <button type="button" class="btn btn-secondary btn-lg rounded-pill" disabled>受講しました</button>
-                    </div>
-            </div>
 
-            <!-- 学年 -->
-            <div class="mb-2 mt-4">
-                授業クラス
+                <!-- 受講ボタン -->
+                <div class="col-md-5 my-auto">
+                    @if($curriculums->alway_delivery_flg == 0 || $deliveryTime == 0)
+                        <!-- 受講ボタン非公開 無効化 -->
+                        <button id="btnDisabled" type="submit" class="btn btn-secondary btn-lg rounded-pill align-middle my-2" disabled>受講しました</button>
+                    @endif
+                    @if($curricurum_progress->clear_flg == 1)
+                        <!-- 受講ボタン受講後 無効化 -->
+                        <button id="flgBtn1" class="btn btn-success btn-lg rounded-pill align-middle my-2" disabled>
+                            <i class="bi bi-check-lg"></i>受講しました</button>
+                    @else
+                        <!-- 受講ボタン -->
+                        <form method="post">
+                            @csrf
+                            <input type="hidden" name="curriculum_id" value="<?php echo $curriculums['id']; ?>">
+                            <input type="hidden" name="clear_flg" value="true">
+                            <button id="flgBtn0" type="submit" class="btn btn-warning btn-lg rounded-pill align-middle my-2" name="update">受講しました</button>
+                        </form>
+                    @endif
+                </div>
+
+
+        <div class="container">
+            <!-- 学年/クラス -->
+            <div class="mt-4 text-center">
+                <p class="col-sm-3 bg-info text-white rounded p-2">{{ $curriculums->grade->name }}</p>
             </div>
             
             <!-- 授業内容 -->
             <div class="my-10">
-                <h3 class="mb-2 mt-4"><div>授業タイトル</div></h3>
-                <div class="mb-2 mt-4">講座内容</div>
-                <div class="mb-2 mt-4">講座説明</div>
+                <h3 class="mb-2 mt-4"><div class="border-bottom">{{ $curriculums->title }}</div></h3>
+                <div class="mb-2 mt-4">{{ $curriculums->thumbnail }}</div>
+                <div class="mb-2 mt-4">{{ $curriculums->description }}</div>
             </div>
         </div>
     </div>

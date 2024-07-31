@@ -40,6 +40,7 @@ Route::prefix('user')->middleware('auth:users')->group(function () {
   Route::get('profile', [App\Http\Controllers\User\ProfileController::class, 'showProfileForm'])->name('show.profile'); //プロフィール設定画面
   Route::get('article/{id}', [App\Http\Controllers\User\ArticleController::class, 'showArticle'])->name('show.article'); //お知らせ詳細ページ
   Route::get('delivery/{id}', [App\Http\Controllers\User\DeliveryController::class, 'showDelivery'])->name('show.delivery'); //配信ページ
+  Route::post('delivery/{id}', [App\Http\Controllers\User\DeliveryController::class, 'updateDelivery'])->name('update.delivery');
 });
 
 // 以下管理ページ追記

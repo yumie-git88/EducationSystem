@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('curriculum_progress', function (Blueprint $table) {
+        Schema::create('curricurum_progress', function (Blueprint $table) { //スペル注意
             $table->bigIncrements('id');
-            $table->foreignId('curriculumus_id')->constrained('curriculums');
+            $table->foreignId('curriculumus_id')->constrained('curriculums'); //スペル注意
             $table->foreignId('users_id')->constrained('users');
             $table->boolean('clear_flg'); // クリアフラグ(クリア：1,未クリア:0)
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('curriculum_progress');
+        Schema::dropIfExists('curricurum_progress');
     }
 };

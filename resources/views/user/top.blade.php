@@ -4,7 +4,7 @@
 <!-- トップページ -->
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <!-- テーブルのバナー画像を表示 -->
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -52,7 +52,8 @@
                         @foreach($articles as $article)
                             <div class="col row">
                                 <div class="col-3">{{ $article->posted_date->format('Y年m月d日') }}</div>
-                                <div class="col-9"><a href="{{ route('show.article', ['id'=>$article->id]) }}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $article->title }}</a></div>
+                                <div class="col-9"><a href="{{ route('show.article', ['id'=>$article->id]) }}"
+                                    class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $article->title }}</a></div>
                             </div>
                         @endforeach
                     @endif

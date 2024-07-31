@@ -15,7 +15,6 @@ class Grade extends Model
      * @var array<int, string>
      */
     protected $fillable = [ //データベースに追加や更新を許可
-        'id',
         'name',
     ];
 

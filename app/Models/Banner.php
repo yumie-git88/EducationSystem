@@ -9,6 +9,10 @@ class Banner extends Model
 {
     use HasFactory;
 
+    protected $fillable = [ //データベースに追加や更新を許可
+        'image',
+    ];
+
     // protected $casts = [
     //     'image' => 'image', //Carbonインスタンスとして扱う
     // ];
