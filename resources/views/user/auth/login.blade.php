@@ -6,7 +6,11 @@
     <div class="d-flex justify-content-end nav h5">
         <a class="nav-link active link-secondary" href="{{ route('register') }}">新規会員登録はこちら</a>
     </div>
-
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

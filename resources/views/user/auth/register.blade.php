@@ -12,6 +12,11 @@
                 <div class="card-header h1 text-center">{{ __('new_member_registration') }}</div>
 
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <!-- Formの送信先を変更,プラウザの検証機能無効 -->
                     <form id="form" method="POST" action="{{ route('register') }}" novalidate>
                         @csrf
@@ -63,7 +68,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" oninput="updateAsterisks(this.value)">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -118,9 +123,7 @@
                                                 <tr>
                                                     <td>パスワード</td>
                                                     <td id="modalPassword">
-                                                        @error('password')
-                                                            <p>********</p>
-                                                        @enderror
+                                                        <p id="asterisks"></p>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -140,3 +143,11 @@
     </div>
 </div>
 @endsection
+
+<script>
+function updateAsterisks(password) {
+    var length = password.length;
+    var asterisks = '*'.repeat(length);
+    document.getElementById('asterisks').innerText = asterisks;
+};
+</script>

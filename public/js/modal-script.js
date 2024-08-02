@@ -13,16 +13,13 @@ $(function() { //モーダル表示
       // modal.find('#modalPassword').text(password);
       console.log('バリデーション成功');
     } else {
-      // $("#registerModal").modal("hide");
-      alert('入力エラー：すべての項目を入力してください');
-      e.preventDefault();
+      console.log('バリデーション失敗');
     }
   });
 });
 
 function validateForm(e) { //バリデーション
   if(document.getElementById("name").value === "") {
-    // $('#registerModal').closest('hide.bs.modal');
     return false;
   } else if(document.getElementById("name_kana").value === "") {
     return false;

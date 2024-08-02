@@ -61,13 +61,9 @@ class LoginController extends Controller
         $credentials = $request->only(['email', 'password']);  //認証情報を受取
 
         if (Auth::guard('users')->attempt($credentials)) { //ユーザー情報が見つかったらログイン
-            return redirect()->route('user.top')->with([
-                'login_msg' => 'ログインしました。',
-            ]);
+            return redirect()->route('user.top')->with('status', 'ログインしました');
         }
-        return back()->withErrors([
-            'login' => ['ログインに失敗しました'],  //ログインできなかったときに元のページに戻る
-        ]);
+        return back()->with('status', 'ログインに失敗しました');
     }
 
     //ログアウト処理 追記

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/top'; //修正2 ログインに成功後のリダイレクト先
+    protected $redirectTo = '/user/top'; //修正2 ログインに成功後のリダイレクト先　/top
 
     // /**
     //  * Create a new controller instance.
@@ -49,7 +49,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'name_kana' => ['required', 'string', 'max:255', 'name_kana'], //追加
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -57,7 +57,7 @@ class RegisterController extends Controller
         ]);
         if ($validator->fails()) {
             Session::flash('errors', $validator->messages()); // エラーメッセージをセッションに保存
-            return redirect()->back()->withInput();
+            return redirect()->back()->with('status', '項目を入力してください'); //->withInput();
         }
     }
 
@@ -69,19 +69,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $grade = Grade::all()->first(); //追加 最初の要素を取得
+        DB::beginTransaction();
+        try {
+            $grade = Grade::all()->first(); //追加 最初の要素を取得
 
-        return User::create([
-            'name' => $data['name'],
-            'name_kana' => $data['name_kana'], //追加
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'grade_id' => $grade->id,  //追加 外部キー作成
-        ]);
+            User::create([ //return User::create
+                'name' => $data['name'],
+                'name_kana' => $data['name_kana'], //追加
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'grade_id' => $grade->id,  //追加 外部キー作成
+            ]);
+            DB::commit();
+            return to_route('login.index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            report($e);
+            return back()->with('error', '登録に失敗しました');
+        }
     }
 
     public function showRegisterForm()
     {
         return view('user.auth.register');
     }
+
+    // protected function redirectPath()
+    // {
+    //     return '/user'; // リダイレクト先のURLを指定
+    // }
 }
