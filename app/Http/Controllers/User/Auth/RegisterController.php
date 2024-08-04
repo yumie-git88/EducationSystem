@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'name_kana' => ['required', 'string', 'max:255', 'name_kana'], //追加
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'between:8,255', 'confirmed'], //追加
+            'password' => ['required', 'string', 'between:8,255', 'confirmed', 'alpha_num:ascii'], //追加
         ]);
         if ($validator->fails()) {
             Session::flash('errors', $validator->messages()); // エラーメッセージをセッションに保存
@@ -69,7 +69,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        DB::beginTransaction();
         try {
             $grade = Grade::all()->first(); //追加 最初の要素を取得
 
@@ -80,10 +79,8 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'grade_id' => $grade->id,  //追加 外部キー作成
             ]);
-            DB::commit();
             return to_route('login.index');
         } catch (\Exception $e) {
-            DB::rollback();
             report($e);
             return back()->with('error', '登録に失敗しました');
         }

@@ -29,19 +29,20 @@
                     @if($curriculums->alway_delivery_flg == 0 || $deliveryTime == 0)
                         <!-- 受講ボタン非公開 無効化 -->
                         <button id="btnDisabled" type="submit" class="btn btn-secondary btn-lg rounded-pill align-middle my-2" disabled>受講しました</button>
-                    @endif
-                    @if($curricurum_progress->clear_flg == 1)
-                        <!-- 受講ボタン受講後 無効化 -->
-                        <button id="flgBtn1" class="btn btn-success btn-lg rounded-pill align-middle my-2" disabled>
-                            <i class="bi bi-check-lg"></i>受講しました</button>
                     @else
-                        <!-- 受講ボタン -->
-                        <form method="post">
-                            @csrf
-                            <input type="hidden" name="curriculum_id" value="<?php echo $curriculums['id']; ?>">
-                            <input type="hidden" name="clear_flg" value="true">
-                            <button id="flgBtn0" type="submit" class="btn btn-warning btn-lg rounded-pill align-middle my-2" name="update">受講しました</button>
-                        </form>
+                        @if($curricurum_progress->clear_flg == 1)
+                            <!-- 受講ボタン受講後 無効化 -->
+                            <button id="flgBtn1" class="btn btn-success btn-lg rounded-pill align-middle my-2" disabled>
+                                <i class="bi bi-check-lg"></i>受講しました</button>
+                        @else
+                            <!-- 受講ボタン -->
+                            <form method="post">
+                                @csrf
+                                <input type="hidden" name="curriculum_id" value="<?php echo $curriculums['id']; ?>">
+                                <input type="hidden" name="clear_flg" value="true">
+                                <button id="flgBtn0" type="submit" class="btn btn-warning btn-lg rounded-pill align-middle my-2" name="update">受講しました</button>
+                            </form>
+                        @endif
                     @endif
                 </div>
 

@@ -26,32 +26,34 @@ class DeliveryController extends Controller
      */
     public function showDelivery($id)
     {
-        $curriculums = Curriculum::find($id); //id指定
-        $grades = Grade::all();
-        $curricurum_progress = CurricurumProgress::find($id);
-
-        if(!$curriculums){ //データがない場合リダイレクト
+        try {
+            $curriculums = Curriculum::find($id); //id指定
+            $grades = Grade::all();
+            $curricurum_progress = CurricurumProgress::find($id);
+    
+            if(!$curriculums){ //データがない場合リダイレクト
+                return redirect()->route('user.top');
+            }
+    
+            $nowTime = Carbon::now(); //現在時刻の取得
+            $deliveryTimes = DeliveryTime::find($id);
+            $startTime = $deliveryTimes->delivery_from;
+            $endTime = $deliveryTimes->delivery_to;
+    
+            if($nowTime >= $startTime && $nowTime <= $endTime) {
+                $deliveryTime = 1; //現在時刻が時間内
+            } else {
+                $deliveryTime = 0; //時間外
+            }
+    
+            return view('user.delivery', compact('curriculums', 'grades', 'deliveryTime','curricurum_progress'));
+        } catch (\Throwable $e) {
             return redirect()->route('user.top');
         }
-
-        $nowTime = Carbon::now(); //現在時刻の取得
-        $deliveryTimes = DeliveryTime::find($id);
-        $startTime = $deliveryTimes->delivery_from;
-        $endTime = $deliveryTimes->delivery_to;
-
-        if($nowTime >= $startTime && $nowTime <= $endTime) {
-            $deliveryTime = 1; //現在時刻が時間内
-        } else {
-            $deliveryTime = 0; //時間外
-        }
-
-        return view('user.delivery', compact('curriculums', 'grades', 'deliveryTime','curricurum_progress'));
     }
 
     public function updateDelivery(Request $request, $id)
     {
-        DB::beginTransaction();
-        
         try {
             // データベース接続情報
             $servername = "localhost";
@@ -84,7 +86,6 @@ class DeliveryController extends Controller
                 $conn->close();
             }
         } catch (Exception $e) {
-            DB::rollback();
             header("Location: delivery/{id}"); // エラーが発生した場合リダイレクト
             exit();
         }

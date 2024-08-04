@@ -32,6 +32,13 @@ class DeliveryTimesTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i'),
                 'updated_at' => date('Y-m-d H:i'),
             ],
+            [
+                'curriculums_id' => 3,
+                'delivery_from' => date('Y-m-d H:i'), //公開開始日
+                'delivery_to' => date('Y-m-d H:i'), //公開終了日
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
         ]);
     }
 }

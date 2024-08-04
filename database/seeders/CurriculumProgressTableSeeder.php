@@ -23,6 +23,20 @@ class CurriculumProgressTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i'),
                 'updated_at' => date('Y-m-d H:i'),
             ],
+            [
+                'curriculumus_id' => 2, //スペル注意
+                'users_id' => 1,
+                'clear_flg' => 1, //クリア
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
+            [
+                'curriculumus_id' => 3, //スペル注意
+                'users_id' => 1,
+                'clear_flg' => 1, //クリア
+                'created_at' => date('Y-m-d H:i'),
+                'updated_at' => date('Y-m-d H:i'),
+            ],
         ]);
     }
 }
