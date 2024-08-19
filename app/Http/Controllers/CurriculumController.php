@@ -31,7 +31,7 @@ class CurriculumController extends Controller
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
             'title' => 'required|max:100',
             'grade_id' => 'required|exists:grades,id',
-            'description' => 'nullable|max:100',
+            'description' => 'required|max:100',
             'url' => 'required|url',
             'alway_delivery_flg' => 'nullable|boolean',
         ], [
@@ -39,8 +39,9 @@ class CurriculumController extends Controller
             'thumbnail.image' => '画像ファイルを選択してください。',
             'thumbnail.mimes' => '画像の形式はjpeg, png, jpg, gifのいずれかである必要があります。',
             'thumbnail.max' => '画像のサイズは2MB以下でなければなりません。',
+            'description.required' => 'カリキュラム説明文入力は必須です。',
             'title.max' => '授業名は100文字以内で入力してください。',
-            'description.max' => '授業内容は100文字以内で入力してください。',
+            'description.max' => 'カリキュラム説明文入力は100文字以内で入力してください。',
             'url' => '有効なURLで入力してください。',
         ]);
 
@@ -112,7 +113,7 @@ class CurriculumController extends Controller
         'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'title' => 'required|max:100', 
         'grade_id' => 'required|exists:grades,id',
-        'description' => 'nullable|max:100', 
+        'description' => 'required|max:100', 
         'video_url' => 'required|url',
         'alway_delivery_flg' => 'nullable|boolean',
     ], [
@@ -120,6 +121,7 @@ class CurriculumController extends Controller
         'title.max' => '授業名は100文字以内で入力してください。',
         'grade_id.required' => '学年を選択してください。',
         'grade_id.exists' => '選択された学年は存在しません。',
+        'description.required' => 'カリキュラム説明文入力は必須です。',
         'description.max' => '授業概要は100文字以内で入力してください。',
         'video_url.required' => '動画URLは必ず入力してください。',
         'video_url.url' => '正しい形式のURLを入力してください。',
