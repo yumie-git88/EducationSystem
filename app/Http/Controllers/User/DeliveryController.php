@@ -36,12 +36,17 @@ class DeliveryController extends Controller
             }
     
             $nowTime = Carbon::now(); //現在時刻の取得
-            $deliveryTimes = DeliveryTime::find($id);
-            $startTime = $deliveryTimes->delivery_from;
-            $endTime = $deliveryTimes->delivery_to;
-    
-            if($nowTime >= $startTime && $nowTime <= $endTime) {
-                $deliveryTime = 1; //現在時刻が時間内
+            $curriculum_id = $curriculums->id; //追加
+            $deliveryTimes = DeliveryTime::find($curriculum_id); //絞り込み対象修正
+            
+            if (isset($deliveryTimes->delivery_from) && isset($deliveryTimes->delivery_to)) { //if追加 配信日時が設定されていない場合
+                $startTime = $deliveryTimes->delivery_from;
+                $endTime = $deliveryTimes->delivery_to;
+                if($nowTime >= $startTime && $nowTime <= $endTime) {
+                    $deliveryTime = 1; //現在時刻が時間内
+                } else {
+                    $deliveryTime = 0; //時間外
+                }
             } else {
                 $deliveryTime = 0; //時間外
             }
