@@ -97,14 +97,14 @@
 
                         <!-- モーダル内容 -->
                         <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <div class="modal-title" id="modalLabel"><h4>入力内容の確認</h4></div>
                                         <div class="text-black-60"><p class="p-4">登録内容はこちらでよろしいですか？</p></div>
                                     </div>
                                     <input id="id" type="hidden" name="project_id" value="" />
-                                    <div class="modal-body">
+                                    <div class="modal-body text-wrap">
 
                                         <table class="table" id="register_table">
                                             <tbody>
