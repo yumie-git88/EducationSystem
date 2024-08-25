@@ -11,29 +11,26 @@
             <div class="row">
                 <!-- 配信動画/画像 -->
                 <div class="col-md-7">
-                    @if($curriculums->alway_delivery_flg == 0 || $deliveryTime == 0)
-                        <!-- 動画非公開 -->
-                        <div class="video_img"><img src="{{ asset('storage/images/video_img/D0002160257_00000_S_002.jpg')}}" class="img-fluid" alt="配信非公開"></div>
-                    @elseif($curriculums->alway_delivery_flg == 1)
+                    @if($curriculums->alway_delivery_flg == 1 || $deliveryTime == 1)
                         <!-- 動画公開 -->
                         <div class="video">
                             <video class="w-100" controls muted preload="none" oncontextmenu="return false;">
                                 <source src="{{ $curriculums->video_url }}" type="video/mp4">
                             </video>
                         </div>
+                    @else
+                        <!-- 動画非公開 -->
+                        <div class="video_img"><img src="{{ asset('storage/images/video_img/D0002160257_00000_S_002.jpg')}}" class="img-fluid" alt="配信非公開"></div>
                     @endif
                 </div>
 
                 <!-- 受講ボタン -->
                 <div class="col-md-5 my-auto">
-                    @if($curriculums->alway_delivery_flg == 0 || $deliveryTime == 0)
-                        <!-- 受講ボタン非公開 無効化 -->
-                        <button id="btnDisabled" type="submit" class="btn btn-secondary btn-lg rounded-pill align-middle my-2" disabled>受講しました</button>
-                    @else
+                    @if($curriculums->alway_delivery_flg == 1 || $deliveryTime == 1)
                         @if($curricurum_progress->clear_flg == 1)
                             <!-- 受講ボタン受講後 無効化 -->
                             <button id="flgBtn1" class="btn btn-success btn-lg rounded-pill align-middle my-2" disabled>
-                                <i class="bi bi-check-lg"></i>受講しました</button>
+                            <i class="bi bi-check-lg"></i>受講しました</button>
                         @else
                             <!-- 受講ボタン -->
                             <form method="post">
@@ -43,9 +40,11 @@
                                 <button id="flgBtn0" type="submit" class="btn btn-warning btn-lg rounded-pill align-middle my-2" name="update">受講しました</button>
                             </form>
                         @endif
+                    @else
+                        <!-- 受講ボタン非公開 無効化 -->
+                        <button id="btnDisabled" type="submit" class="btn btn-secondary btn-lg rounded-pill align-middle my-2" disabled>受講しました</button>
                     @endif
                 </div>
-
 
         <div class="container">
             <!-- 学年/クラス -->
