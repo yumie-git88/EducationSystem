@@ -29,15 +29,17 @@ class DeliveryController extends Controller
         try {
             $curriculums = Curriculum::find($id); //id指定
             $grades = Grade::all();
-            $curricurum_progress = CurricurumProgress::find($id);
+            $userId = Auth::id(); // ログインしているユーザーのIDを取得 追加
+            $curricurum_progress = CurricurumProgress::where('curriculumus_id', $id) //絞り込みメソッド修正2
+                ->where('users_id', $userId) // ユーザーIDで絞り込み
+                ->first();
     
             if(!$curriculums){ //データがない場合リダイレクト
                 return redirect()->route('user.top');
             }
     
             $nowTime = Carbon::now(); //現在時刻の取得
-            $curriculum_id = $curriculums->id; //追加
-            $deliveryTimes = DeliveryTime::find($curriculum_id); //絞り込み対象修正
+            $deliveryTimes = DeliveryTime::where('curriculums_id', $id)->first(); //絞り込みメソッド修正
             
             if (isset($deliveryTimes->delivery_from) && isset($deliveryTimes->delivery_to)) { //if追加 配信日時が設定されていない場合
                 $startTime = $deliveryTimes->delivery_from;
@@ -50,8 +52,12 @@ class DeliveryController extends Controller
             } else {
                 $deliveryTime = 0; //時間外
             }
-    
-            return view('user.delivery', compact('curriculums', 'grades', 'deliveryTime','curricurum_progress'));
+            
+            if ($curricurum_progress) { //if追加
+                return view('user.delivery', compact('curriculums', 'grades', 'deliveryTime','curricurum_progress'));
+            } else {
+                return redirect()->route('user.top');
+            }
         } catch (\Throwable $e) {
             return redirect()->route('user.top');
         }
