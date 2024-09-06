@@ -79,11 +79,12 @@ class DeliveryController extends Controller
                 die("Connection failed: " . $conn->connect_error);
             }
     
+            $userId = Auth::id(); // ログインしているユーザーのIDを取得 追加
             $flgId = Curriculum::find($id)->id; //idを取得
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // clear_flg を 1 に更新する SQL
-                $sql = $conn->prepare("UPDATE curricurum_progress SET clear_flg = 1 WHERE id = ?");
-                $sql->bind_param("i", $flgId);
+                $sql = $conn->prepare("UPDATE curricurum_progress SET clear_flg = 1 WHERE curriculumus_id = ? AND users_id = ?");
+                $sql->bind_param("ii", $flgId, $userId); //追記
         
                 // クエリの実行
                 if ($sql->execute() === TRUE) {
@@ -97,6 +98,7 @@ class DeliveryController extends Controller
                 $conn->close();
             }
         } catch (Exception $e) {
+            echo "Exception: " . $e->getMessage(); // エラーメッセージを表示
             header("Location: delivery/{id}"); // エラーが発生した場合リダイレクト
             exit();
         }
