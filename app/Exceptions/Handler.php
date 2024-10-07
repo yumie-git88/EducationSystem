@@ -47,4 +47,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    protected function unauthenticated($request,Throwable $exception) //追記 認証してない時のリダイレクト先
+{
+    if($request->expectsJson()) {
+        return respomse()->json(['message' => $exception->getMessage()],401);
+    }
+    if($request->is('user') || $request->is('user/*')){
+        return redirect()->guest('/');
+    }
+    if($request->is('admin') || $request->is('admin/*')){
+        return redirect()->guest('/admin/login');
+    }
+    return redirect()->guest($exception->redirectTo ?? route('login.index')); //追記　.index
+}
 }
